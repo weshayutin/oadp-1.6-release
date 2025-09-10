@@ -448,9 +448,9 @@ class JiraGitHubReporter:
                     state_info = f" ({gh_issue.state})"
                     github_link_text = f"[#{gh_issue.number}]({gh_issue.url}) - {gh_issue.title}{state_info}"
                     
-                    # Apply dark green color for closed issues
+                    # Apply formatting for closed issues (GitHub markdown doesn't support custom colors)
                     if gh_issue.state.lower() == "closed":
-                        github_link_text = f'<span style="color: darkgreen">{github_link_text}</span>'
+                        github_link_text = f"✅ **{github_link_text}**"
                     
                     github_parts.append(github_link_text)
                 github_cell = "<br>".join(github_parts)
@@ -520,9 +520,9 @@ class JiraGitHubReporter:
             state_info = f" ({milestone_issue.state})"
             velero_cell = f"[#{milestone_issue.number}]({milestone_issue.url}) - {milestone_issue.title}{state_info}"
             
-            # Apply dark green color for closed issues
+            # Apply formatting for closed issues (GitHub markdown doesn't support custom colors)
             if milestone_issue.state.lower() == "closed":
-                velero_cell = f'<span style="color: darkgreen">{velero_cell}</span>'
+                velero_cell = f"✅ **{velero_cell}**"
             
             # Format status cell
             status_cell = milestone_issue.state.capitalize()
