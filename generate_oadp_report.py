@@ -33,6 +33,7 @@ class JiraIssue:
     status: str
     priority: str
     issue_type: str
+    assignee: str
     github_issues: List[GitHubIssue]
     url: str
 
@@ -65,7 +66,7 @@ class JiraGitHubReporter:
         
         params = {
             'jql': jql,
-            'fields': 'summary,status,priority,issuetype,issuelinks',
+            'fields': 'summary,status,priority,issuetype,issuelinks,assignee',
             'expand': 'changelog',
             'maxResults': 50
         }
@@ -385,12 +386,16 @@ class JiraGitHubReporter:
             
             # Create Jira issue object
             fields = detailed_issue['fields']
+            assignee_info = fields.get('assignee')
+            assignee = assignee_info.get('displayName', 'Unassigned') if assignee_info else 'Unassigned'
+            
             jira_issue = JiraIssue(
                 key=issue_key,
                 summary=fields.get('summary', ''),
                 status=fields.get('status', {}).get('name', 'Unknown'),
                 priority=fields.get('priority', {}).get('name', 'Unknown'),
                 issue_type=fields.get('issuetype', {}).get('name', 'Unknown'),
+                assignee=assignee,
                 github_issues=github_issues,
                 url=f"https://issues.redhat.com/browse/{issue_key}"
             )
@@ -430,8 +435,8 @@ class JiraGitHubReporter:
             "",
             "*Note: OADP issues that reference Velero v1.18 milestone issues are shown in the milestone cross-reference section below.*",
             "",
-            "| Jira Issue | Upstream Velero Issue(s) | Upstream Velero Issue Labels |",
-            "|------------|---------------------------|------------------------------|"
+            "| Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |",
+            "|------------|---------------|---------------------------|------------------------------|"
         ]
         
         issues_with_github = 0
@@ -472,7 +477,7 @@ class JiraGitHubReporter:
             else:
                 labels_cell = "*N/A*"
             
-            markdown_lines.append(f"| {jira_cell} | {github_cell} | {labels_cell} |")
+            markdown_lines.append(f"| {jira_cell} | {issue.assignee} | {github_cell} | {labels_cell} |")
         
         # Add summary
         milestone_referenced_count = len(issues_in_milestone)
