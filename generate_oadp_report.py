@@ -514,8 +514,8 @@ class JiraGitHubReporter:
             "",
             "This section lists all issues in the [Velero v1.18 milestone](https://github.com/vmware-tanzu/velero/issues?q=is%3Aissue%20milestone%3Av1.18) and identifies which ones are also referenced by OADP issues above.",
             "",
-            "| Velero Issue | Status | Labels | Associated OADP Issue(s) |",
-            "|--------------|--------|--------|-------------------------|"
+            "| Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |",
+            "|--------------|--------|--------|-------------------------|---------------|"
         ]
         
         matched_issues = 0
@@ -544,14 +544,25 @@ class JiraGitHubReporter:
             if milestone_issue.number in github_to_oadp:
                 oadp_refs = github_to_oadp[milestone_issue.number]
                 oadp_parts = []
+                assignee_parts = []
                 for oadp_issue in oadp_refs:
                     oadp_parts.append(f"[{oadp_issue.key}]({oadp_issue.url})")
+                    assignee_parts.append(oadp_issue.assignee)
                 oadp_cell = "<br>".join(oadp_parts)
+                # Remove duplicates but preserve order
+                unique_assignees = []
+                seen = set()
+                for assignee in assignee_parts:
+                    if assignee not in seen:
+                        unique_assignees.append(assignee)
+                        seen.add(assignee)
+                assignee_cell = "<br>".join(unique_assignees)
                 matched_issues += 1
             else:
                 oadp_cell = "*Not referenced by OADP issues*"
+                assignee_cell = "*N/A*"
             
-            markdown_lines.append(f"| {velero_cell} | {status_cell} | {labels_cell} | {oadp_cell} |")
+            markdown_lines.append(f"| {velero_cell} | {status_cell} | {labels_cell} | {oadp_cell} | {assignee_cell} |")
         
         # Add milestone summary
         markdown_lines.extend([
