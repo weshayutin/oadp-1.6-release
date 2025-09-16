@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 OADP Jira Issues to Upstream Velero Issues Report Generator
@@ -15,6 +16,14 @@ import argparse
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from urllib.parse import urlparse
+
+# Import content checker for duplicate detection
+try:
+    from content_checker import MarkdownContentChecker, ParsedRow
+except ImportError:
+    print("Warning: content_checker.py not found. Duplicate checking will be disabled.")
+    MarkdownContentChecker = None
+    ParsedRow = None
 
 @dataclass
 class GitHubIssue:
@@ -402,12 +411,60 @@ class JiraGitHubReporter:
             
             processed_issues.append(jira_issue)
         
+        # Check for content changes
+        print("\n" + "-"*50)
+        print("Checking for content changes...")
+        new_issues, updated_issues, unchanged_issues = self._check_content_changes(processed_issues, "oadp_velero_issues.md")
+        
         # Get Velero 1.18 milestone issues
         velero_milestone_issues = self.get_velero_milestone_issues('v1.18')
         
         # Generate markdown report
         return self._generate_markdown(processed_issues, jql, velero_milestone_issues)
     
+    def _check_content_changes(self, issues: List[JiraIssue], output_file: str = "oadp_velero_issues.md") -> Tuple[List[JiraIssue], List[JiraIssue], List[JiraIssue]]:
+        """
+        Check for content changes and categorize issues into new, updated, and unchanged.
+        
+        Returns:
+            (new_issues, updated_issues, unchanged_issues)
+        """
+        if not MarkdownContentChecker:
+            print("Content checker not available. All issues will be treated as new.")
+            return issues, [], []
+        
+        # Load existing content
+        checker = MarkdownContentChecker(output_file)
+        checker.load_existing_content()
+        
+        new_issues = []
+        updated_issues = []
+        unchanged_issues = []
+        
+        for issue in issues:
+            github_numbers = [gh.number for gh in issue.github_issues]
+            
+            is_duplicate, existing_row = checker.check_for_duplicates(issue.key, github_numbers)
+            should_update, _ = checker.should_update_row(issue.key, github_numbers)
+            
+            if is_duplicate:
+                unchanged_issues.append(issue)
+                print(f"✓ {issue.key}: Content unchanged (same GitHub issues: {github_numbers})")
+            elif should_update:
+                updated_issues.append(issue)
+                existing_github = existing_row.github_issues if existing_row else []
+                print(f"⚠ {issue.key}: GitHub issues changed from {existing_github} to {github_numbers}")
+            else:
+                new_issues.append(issue)
+                print(f"+ {issue.key}: New issue (GitHub issues: {github_numbers})")
+        
+        print(f"\nContent Analysis Summary:")
+        print(f"- New issues: {len(new_issues)}")
+        print(f"- Updated issues: {len(updated_issues)}")
+        print(f"- Unchanged issues: {len(unchanged_issues)}")
+        
+        return new_issues, updated_issues, unchanged_issues
+
     def _generate_markdown(self, issues: List[JiraIssue], jql: str, velero_milestone_issues: List[GitHubIssue]) -> str:
         """Generate the markdown report from processed issues"""
         
@@ -657,6 +714,19 @@ Environment Variables:
         help='Custom JQL query to search for Jira issues'
     )
     
+    
+    parser.add_argument(
+        '--check-duplicates',
+        action='store_true',
+        default=True,
+        help='Check for duplicate content before writing new rows (default: enabled)'
+    )
+    
+    parser.add_argument(
+        '--no-check-duplicates',
+        action='store_true',
+        help='Disable duplicate content checking (overwrite all content)'
+    )
     
     parser.add_argument(
         '--dry-run',
