@@ -481,6 +481,10 @@ class JiraGitHubReporter:
         # Filter out issues that appear in milestone section
         candidate_issues = [issue for issue in issues if issue.key not in issues_in_milestone]
         
+        # Load existing content to preserve order and row numbers
+        existing_candidate_table = self._load_existing_candidate_table()
+        existing_milestone_table = self._load_existing_milestone_table()
+        
         markdown_lines = [
             "# OADP Issues and Upstream Velero Issue Mapping",
             "",
@@ -492,14 +496,17 @@ class JiraGitHubReporter:
             "",
             "*Note: OADP issues that reference Velero v1.18 milestone issues are shown in the milestone cross-reference section below.*",
             "",
-            "| Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |",
-            "|------------|---------------|---------------------------|------------------------------|"
+            "| Row # | Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |",
+            "|-------|------------|---------------|---------------------------|------------------------------|"
         ]
         
         issues_with_github = 0
         issues_without_github = 0
         
-        for issue in candidate_issues:
+        # Generate ordered candidate table with row numbers
+        ordered_candidate_rows = self._generate_ordered_candidate_table(candidate_issues, existing_candidate_table)
+        
+        for row_num, issue in ordered_candidate_rows:
             # Format Jira issue cell
             jira_cell = f"[{issue.key}]({issue.url}) - {issue.summary}"
             
@@ -534,7 +541,7 @@ class JiraGitHubReporter:
             else:
                 labels_cell = "*N/A*"
             
-            markdown_lines.append(f"| {jira_cell} | {issue.assignee} | {github_cell} | {labels_cell} |")
+            markdown_lines.append(f"| {row_num} | {jira_cell} | {issue.assignee} | {github_cell} | {labels_cell} |")
         
         # Add summary
         milestone_referenced_count = len(issues_in_milestone)
@@ -555,6 +562,149 @@ class JiraGitHubReporter:
         
         return "\n".join(markdown_lines)
     
+    def _load_existing_candidate_table(self) -> Dict[str, int]:
+        """Load existing candidate table and return mapping of Jira key to row number"""
+        existing_rows = {}
+        try:
+            with open("oadp_velero_issues.md", 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            lines = content.split('\n')
+            in_candidate_table = False
+            current_row = 1
+            
+            for line in lines:
+                # Identify candidate table section
+                if "| Row # | Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |" in line:
+                    in_candidate_table = True
+                    current_row = 1
+                    continue
+                elif line.startswith('|-------|'):
+                    continue
+                elif in_candidate_table and line.startswith('|') and '|' in line[1:]:
+                    # Parse row to extract Jira key
+                    parts = [part.strip() for part in line.split('|')]
+                    if len(parts) >= 3:
+                        # Skip if this is a header row or separator
+                        if parts[1].isdigit() or parts[1] == 'Row #':
+                            if parts[1].isdigit():
+                                # Extract Jira key from the third column (index 2)
+                                jira_part = parts[2]
+                                jira_match = re.search(r'\[([^]]+)\]', jira_part)
+                                if jira_match:
+                                    jira_key = jira_match.group(1)
+                                    existing_rows[jira_key] = int(parts[1])
+                                    current_row = max(current_row, int(parts[1]) + 1)
+                elif in_candidate_table and not line.startswith('|'):
+                    # End of candidate table
+                    break
+                    
+        except FileNotFoundError:
+            pass
+        except Exception as e:
+            print(f"Warning: Error loading existing candidate table: {e}")
+        
+        return existing_rows
+    
+    def _load_existing_milestone_table(self) -> Dict[int, int]:
+        """Load existing milestone table and return mapping of GitHub issue number to row number"""
+        existing_rows = {}
+        try:
+            with open("oadp_velero_issues.md", 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            lines = content.split('\n')
+            in_milestone_table = False
+            current_row = 1
+            
+            for line in lines:
+                # Identify milestone table section
+                if "| Row # | Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |" in line:
+                    in_milestone_table = True
+                    current_row = 1
+                    continue
+                elif line.startswith('|-------|'):
+                    continue
+                elif in_milestone_table and line.startswith('|') and '|' in line[1:]:
+                    # Parse row to extract GitHub issue number
+                    parts = [part.strip() for part in line.split('|')]
+                    if len(parts) >= 3:
+                        if parts[1].isdigit() or parts[1] == 'Row #':
+                            if parts[1].isdigit():
+                                # Extract GitHub issue number from the second column (index 2)
+                                velero_part = parts[2]
+                                github_match = re.search(r'#(\d+)', velero_part)
+                                if github_match:
+                                    github_number = int(github_match.group(1))
+                                    existing_rows[github_number] = int(parts[1])
+                                    current_row = max(current_row, int(parts[1]) + 1)
+                elif in_milestone_table and not line.startswith('|'):
+                    # End of milestone table
+                    break
+                    
+        except FileNotFoundError:
+            pass
+        except Exception as e:
+            print(f"Warning: Error loading existing milestone table: {e}")
+        
+        return existing_rows
+    
+    def _generate_ordered_candidate_table(self, issues: List[JiraIssue], existing_table: Dict[str, int]) -> List[Tuple[int, JiraIssue]]:
+        """Generate ordered table rows preserving existing row numbers and appending new ones"""
+        ordered_rows = []
+        used_row_numbers = set(existing_table.values())
+        next_row_number = max(used_row_numbers) + 1 if used_row_numbers else 1
+        
+        # First, add existing issues in their original order
+        existing_issues = []
+        new_issues = []
+        
+        for issue in issues:
+            if issue.key in existing_table:
+                row_num = existing_table[issue.key]
+                ordered_rows.append((row_num, issue))
+                existing_issues.append(issue)
+            else:
+                new_issues.append(issue)
+        
+        # Sort existing issues by their row numbers
+        ordered_rows.sort(key=lambda x: x[0])
+        
+        # Append new issues at the end
+        for issue in new_issues:
+            ordered_rows.append((next_row_number, issue))
+            next_row_number += 1
+        
+        return ordered_rows
+    
+    def _generate_ordered_milestone_table(self, milestone_issues: List[GitHubIssue], existing_table: Dict[int, int]) -> List[Tuple[int, GitHubIssue]]:
+        """Generate ordered milestone table rows preserving existing row numbers and appending new ones"""
+        ordered_rows = []
+        used_row_numbers = set(existing_table.values())
+        next_row_number = max(used_row_numbers) + 1 if used_row_numbers else 1
+        
+        # First, add existing issues in their original order
+        existing_issues = []
+        new_issues = []
+        
+        for issue in milestone_issues:
+            if issue.number in existing_table:
+                row_num = existing_table[issue.number]
+                ordered_rows.append((row_num, issue))
+                existing_issues.append(issue)
+            else:
+                new_issues.append(issue)
+        
+        # Sort existing issues by their row numbers
+        ordered_rows.sort(key=lambda x: x[0])
+        
+        # Append new issues at the end
+        for issue in new_issues:
+            ordered_rows.append((next_row_number, issue))
+            next_row_number += 1
+        
+        return ordered_rows
+    
     def _generate_velero_milestone_section(self, oadp_issues: List[JiraIssue], milestone_issues: List[GitHubIssue]) -> List[str]:
         """Generate the Velero 1.18 milestone cross-reference section"""
         
@@ -566,18 +716,24 @@ class JiraGitHubReporter:
                     github_to_oadp[gh_issue.number] = []
                 github_to_oadp[gh_issue.number].append(oadp_issue)
         
+        # Load existing milestone table to preserve order and row numbers
+        existing_milestone_table = self._load_existing_milestone_table()
+        
         markdown_lines = [
             "## Velero v1.18 Milestone Issues Cross-Reference",
             "",
             "This section lists all issues in the [Velero v1.18 milestone](https://github.com/vmware-tanzu/velero/issues?q=is%3Aissue%20milestone%3Av1.18) and identifies which ones are also referenced by OADP issues above.",
             "",
-            "| Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |",
-            "|--------------|--------|--------|-------------------------|---------------|"
+            "| Row # | Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |",
+            "|-------|--------------|--------|--------|-------------------------|---------------|"
         ]
         
         matched_issues = 0
         
-        for milestone_issue in milestone_issues:
+        # Generate ordered milestone table with row numbers
+        ordered_milestone_rows = self._generate_ordered_milestone_table(milestone_issues, existing_milestone_table)
+        
+        for row_num, milestone_issue in ordered_milestone_rows:
             # Format Velero issue cell
             state_info = f" ({milestone_issue.state})"
             velero_cell = f"[#{milestone_issue.number}]({milestone_issue.url}) - {milestone_issue.title}{state_info}"
@@ -619,7 +775,7 @@ class JiraGitHubReporter:
                 oadp_cell = "*Not referenced by OADP issues*"
                 assignee_cell = "*N/A*"
             
-            markdown_lines.append(f"| {velero_cell} | {status_cell} | {labels_cell} | {oadp_cell} | {assignee_cell} |")
+            markdown_lines.append(f"| {row_num} | {velero_cell} | {status_cell} | {labels_cell} | {oadp_cell} | {assignee_cell} |")
         
         # Add milestone summary
         markdown_lines.extend([

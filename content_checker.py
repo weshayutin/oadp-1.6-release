@@ -50,17 +50,20 @@ class MarkdownContentChecker:
         in_cross_ref_table = False
         
         for i, line in enumerate(lines, 1):
-            # Identify main table section
-            if "| Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |" in line:
+            # Identify main table section - check for both old and new formats
+            if ("| Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |" in line or
+                "| Row # | Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Upstream Velero Issue Labels |" in line):
                 in_main_table = True
                 in_cross_ref_table = False
                 continue
-            # Identify cross-reference table section
-            elif "| Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |" in line:
+            # Identify cross-reference table section - check for both old and new formats
+            elif ("| Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |" in line or
+                  "| Row # | Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |" in line):
                 in_main_table = False
                 in_cross_ref_table = True
                 continue
-            elif line.startswith('|------------|'):
+            elif line.startswith('|-------|') or line.startswith('|------------|'):
+                # Skip separator lines for both old and new formats
                 continue
             elif in_main_table and line.startswith('|') and '|' in line[1:]:
                 # Parse main table row
@@ -80,18 +83,29 @@ class MarkdownContentChecker:
                 in_cross_ref_table = False
     
     def _parse_main_table_row(self, line: str, line_number: int) -> Optional[ParsedRow]:
-        """Parse a main table row (format: | Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Labels |)"""
+        """Parse a main table row (format: | Row # | Jira Issue | Jira Assignee | Upstream Velero Issue(s) | Labels |)"""
         # Split by | and clean up
         parts = [part.strip() for part in line.split('|')]
         
-        # Skip empty or malformed rows
+        # Detect if this is old format (4 columns after first empty) or new format (5 columns after first empty)
         if len(parts) < 5:
             return None
-            
-        jira_part = parts[1]
-        assignee_part = parts[2]
-        github_part = parts[3]
-        labels_part = parts[4]
+        
+        # Check if first column contains a row number (new format) or is the Jira issue (old format)
+        has_row_number = False
+        if len(parts) >= 6 and parts[1].isdigit():
+            # New format with Row # column
+            has_row_number = True
+            jira_part = parts[2]
+            assignee_part = parts[3]
+            github_part = parts[4]
+            labels_part = parts[5]
+        else:
+            # Old format without Row # column
+            jira_part = parts[1]
+            assignee_part = parts[2]
+            github_part = parts[3]
+            labels_part = parts[4]
         
         # Extract Jira key and summary
         jira_match = re.search(r'\[([^]]+)\]\([^)]+\)\s*-\s*(.+)', jira_part)
@@ -118,21 +132,33 @@ class MarkdownContentChecker:
         )
     
     def _parse_cross_ref_table_row(self, line: str, line_number: int) -> Optional[ParsedRow]:
-        """Parse a cross-reference table row (format: | Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |)"""
+        """Parse a cross-reference table row (format: | Row # | Velero Issue | Status | Labels | Associated OADP Issue(s) | Jira Assignee |)"""
         # Split by | and clean up
         parts = [part.strip() for part in line.split('|')]
         
-        # Skip empty or malformed rows
+        # Detect if this is old format (5 columns after first empty) or new format (6 columns after first empty)
         if len(parts) < 6:
             return None
-            
-        velero_part = parts[1]      # Velero Issue
-        status_part = parts[2]      # Status
-        labels_part = parts[3]      # Labels
-        oadp_part = parts[4]        # Associated OADP Issue(s)
-        assignee_part = parts[5]    # Jira Assignee
         
-        # Extract OADP issue key from the 4th column
+        # Check if first column contains a row number (new format) or is the Velero issue (old format)
+        has_row_number = False
+        if len(parts) >= 7 and parts[1].isdigit():
+            # New format with Row # column
+            has_row_number = True
+            velero_part = parts[2]      # Velero Issue
+            status_part = parts[3]      # Status
+            labels_part = parts[4]      # Labels
+            oadp_part = parts[5]        # Associated OADP Issue(s)
+            assignee_part = parts[6]    # Jira Assignee
+        else:
+            # Old format without Row # column
+            velero_part = parts[1]      # Velero Issue
+            status_part = parts[2]      # Status
+            labels_part = parts[3]      # Labels
+            oadp_part = parts[4]        # Associated OADP Issue(s)
+            assignee_part = parts[5]    # Jira Assignee
+        
+        # Extract OADP issue key from the OADP column
         oadp_match = re.search(r'\[([^]]+)\]\([^)]+\)\s*-?\s*(.*)', oadp_part)
         if not oadp_match:
             # Skip rows that don't reference OADP issues (like "*Not referenced by OADP issues*")
