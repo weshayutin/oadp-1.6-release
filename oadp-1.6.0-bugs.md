@@ -1,18 +1,12 @@
-# OADP 1.6.0 Bugs (Excluding MODIFIED)
+# OADP 1.6.0 Bugs (Excluding MODIFIED and Closed)
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Bug AND status not in (MODIFIED) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 27  
-**Assignees:** 8  
+**Total issues:** 20  
+**Assignees:** 7  
 **Generated:** 2026-03-26
 
 ---
-
-## Aziza Karol (1 issues)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-5181](https://redhat.atlassian.net/browse/OADP-5181) | "Cannot create property 'kind' on string" when creating YAML from Console | Minor | Closed | 2024-11-06 | oadp_ui, triaged |
 
 ## Joseph Antony Vaikath (3 issues)
 
@@ -28,11 +22,10 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-3692](https://redhat.atlassian.net/browse/OADP-3692) | Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Minor | ASSIGNED | 2024-03-08 | oadp_crd_api_version_bump, triaged |
 
-## Michal Pryc (3 issues)
+## Michal Pryc (2 issues)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-4289](https://redhat.atlassian.net/browse/OADP-4289) | Velero fails to patch managed fields on namespace resources which causing restore to partially fail | Normal | Closed | 2024-06-13 | oadp_restore, oadp_upstream_bug_fix, triaged |
 | [OADP-5114](https://redhat.atlassian.net/browse/OADP-5114) | Incompatibility of OADP with data mover restore | Normal | POST | 2024-10-25 | oadp_datamover, oadp_upstream_bug_fix, triaged |
 | [OADP-6752](https://redhat.atlassian.net/browse/OADP-6752) | Missing .storageconfig file in the backuprepository location on the s3 bsl | Undefined | New | 2025-09-25 | triaged |
 
@@ -55,22 +48,17 @@
 | [OADP-5171](https://redhat.atlassian.net/browse/OADP-5171) | BSL status.message field shouldn't have the http response as output when bucket doesn't exist | Minor | POST | 2024-11-04 | oadp_bsl, oadp_upstream_bug_fix, triaged |
 | [OADP-6740](https://redhat.atlassian.net/browse/OADP-6740) | [Upstream testing] VolumeSnapshotContent resources are left out in cluster with VGS path | Undefined | New | 2025-09-25 | oadp_upstream_bug_fix, triaged |
 
-## Tiger Kaovilai (7 issues)
+## Tiger Kaovilai (4 issues)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6896](https://redhat.atlassian.net/browse/OADP-6896) | Node agent pod restarts cancel all DataUploads across all nodes, blocking backup queue in OADP 1.5 | Major | New | 2025-10-23 | oadp_upstream_bug_fix, oadp_upstream_milestone_v1.18, triaged |
-| [OADP-7069](https://redhat.atlassian.net/browse/OADP-7069) | DataUploads do not resume/canceled after node-agent restart, gets stuck | Normal | Closed | 2025-12-09 | oadp_upstream_bug_fix, triaged |
-| [OADP-5029](https://redhat.atlassian.net/browse/OADP-5029) | aws DataMover, File System Backup do not work with region discovery functionality. | Minor | Closed | 2024-10-11 | backport, create-test, need-rh-and-ibm-qe, oadp_datamover, oadp_failed_qe, oadp_upstream_bug_fix, triaged, upstream |
 | [OADP-5729](https://redhat.atlassian.net/browse/OADP-5729) | FSBackup doesn't restore ImageStreamTag | Minor | New | 2025-02-28 |  |
 | [OADP-5777](https://redhat.atlassian.net/browse/OADP-5777) | Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Undefined | POST | 2025-03-10 | oadp_dpa, triaged |
 | [OADP-5829](https://redhat.atlassian.net/browse/OADP-5829) | wrong S3 identifier (resticIdentifier) while using a kopia BackupRepository  | Undefined | POST | 2025-03-20 | oadp_upstream_bug_fix |
-| [OADP-6252](https://redhat.atlassian.net/browse/OADP-6252) | Namespaces not backed up with backed up resources | Undefined | Closed | 2025-06-09 | oadp_upstream_bug_fix, traiged |
 
-## Wesley Hayutin (3 issues)
+## Wesley Hayutin (1 issues)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6689](https://redhat.atlassian.net/browse/OADP-6689) | Velero backups stuck in "Deleting" state after their TTL expires | Major | Closed | 2025-09-12 | oadp_upstream_bug_fix, triaged |
 | [OADP-3039](https://redhat.atlassian.net/browse/OADP-3039) | PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Normal | POST | 2023-11-03 | oadp_upstream_bug_fix, oadp_validation, triaged |
-| [OADP-6507](https://redhat.atlassian.net/browse/OADP-6507) | Wrong selector label on PVC created by velero impacts other components as MTC | Undefined | Closed | 2025-08-11 | oadp_upstream_bug_fix, triaged |
