@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Query OADP Jira bugs for a given fixVersion and generate a markdown report
-grouped by assignee.
+Query OADP Jira issues (Bugs, Tasks, Epics) for a given fixVersion and
+generate a markdown report grouped by issue type, then by assignee.
 
 Auth: set JIRA_EMAIL and JIRA_API_TOKEN env vars, or create a ~/.netrc entry
 for redhat.atlassian.net.
@@ -61,7 +61,7 @@ def get_auth_header():
 def jira_search(jql, auth_header):
     """Return all matching issues, handling pagination via nextPageToken."""
     issues = []
-    fields = "summary,status,priority,created,labels,assignee"
+    fields = "summary,status,priority,created,labels,assignee,issuetype"
     next_token = None
     while True:
         params = {"jql": jql, "maxResults": PAGE_SIZE, "fields": fields}
@@ -86,10 +86,15 @@ def jira_search(jql, auth_header):
     return issues, len(issues)
 
 
-def build_jql(version, excluded_statuses):
+ISSUE_TYPES = ("Bug", "Task", "Epic")
+ISSUE_TYPE_ORDER = {t: i for i, t in enumerate(ISSUE_TYPES)}
+
+
+def build_jql(version, excluded_statuses, issue_types=ISSUE_TYPES):
     statuses = ", ".join(excluded_statuses)
+    types = ", ".join(issue_types)
     return (
-        f'project = OADP AND fixVersion = "{version}" AND issuetype = Bug '
+        f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
         f"AND status not in ({statuses}) "
         f"ORDER BY priority DESC, created DESC"
     )
@@ -108,41 +113,57 @@ def format_issue_row(issue):
 
 
 def generate_markdown(version, issues, total):
-    by_assignee = defaultdict(list)
+    by_type = defaultdict(list)
+    for issue in issues:
+        itype = issue["fields"].get("issuetype", {}).get("name", "Other")
+        by_type[itype].append(issue)
+
+    all_assignees = set()
     for issue in issues:
         assignee = issue["fields"].get("assignee")
-        name = assignee["displayName"] if assignee else "Unassigned"
-        by_assignee[name].append(issue)
+        all_assignees.add(assignee["displayName"] if assignee else "Unassigned")
 
-    assignee_names = sorted(by_assignee.keys(), key=str.lower)
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     excluded = ", ".join(EXCLUDED_STATUSES)
     jql = build_jql(version, EXCLUDED_STATUSES)
 
     lines = []
-    lines.append(f"# {version} Bugs (Excluding {excluded})")
+    lines.append(f"# {version} Issues (Excluding {excluded})")
     lines.append("")
     lines.append(f"**JQL:** `{jql}`")
     lines.append("")
     lines.append(f"**Total issues:** {total}  ")
-    lines.append(f"**Assignees:** {len(by_assignee)}  ")
+    lines.append(f"**Assignees:** {len(all_assignees)}  ")
     lines.append(f"**Generated:** {now}")
     lines.append("")
     lines.append("---")
 
-    for name in assignee_names:
-        issues_for = by_assignee[name]
-        issues_for.sort(key=lambda i: (
-            PRIORITY_ORDER.get(i["fields"].get("priority", {}).get("name", "Undefined"), 99),
-            i["fields"]["created"],
-        ))
+    type_order = sorted(by_type.keys(), key=lambda t: ISSUE_TYPE_ORDER.get(t, 99))
+
+    for itype in type_order:
+        type_issues = by_type[itype]
         lines.append("")
-        lines.append(f"## {name} ({len(issues_for)} issues)")
-        lines.append("")
-        lines.append("| Key | Summary | Priority | Status | Created | Labels |")
-        lines.append("|-----|---------|----------|--------|---------|--------|")
-        for issue in issues_for:
-            lines.append(format_issue_row(issue))
+        lines.append(f"# {itype}s ({len(type_issues)})")
+
+        by_assignee = defaultdict(list)
+        for issue in type_issues:
+            assignee = issue["fields"].get("assignee")
+            name = assignee["displayName"] if assignee else "Unassigned"
+            by_assignee[name].append(issue)
+
+        for name in sorted(by_assignee.keys(), key=str.lower):
+            issues_for = by_assignee[name]
+            issues_for.sort(key=lambda i: (
+                PRIORITY_ORDER.get(i["fields"].get("priority", {}).get("name", "Undefined"), 99),
+                i["fields"]["created"],
+            ))
+            lines.append("")
+            lines.append(f"## {name} ({len(issues_for)})")
+            lines.append("")
+            lines.append("| Key | Summary | Priority | Status | Created | Labels |")
+            lines.append("|-----|---------|----------|--------|---------|--------|")
+            for issue in issues_for:
+                lines.append(format_issue_row(issue))
 
     return "\n".join(lines) + "\n"
 
