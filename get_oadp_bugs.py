@@ -137,8 +137,49 @@ def generate_markdown(version, issues, total):
     lines.append(f"**Generated:** {now}")
     lines.append("")
     lines.append("---")
+    lines.append("")
 
     type_order = sorted(by_type.keys(), key=lambda t: ISSUE_TYPE_ORDER.get(t, 99))
+
+    def slug(text):
+        return text.lower().replace(" ", "-").replace("(", "").replace(")", "")
+
+    # Build per-type assignee data for navigation table
+    nav_data = {}
+    for itype in type_order:
+        by_a = defaultdict(list)
+        for issue in by_type[itype]:
+            assignee = issue["fields"].get("assignee")
+            name = assignee["displayName"] if assignee else "Unassigned"
+            by_a[name].append(issue)
+        nav_data[itype] = by_a
+
+    all_names = sorted(all_assignees, key=str.lower)
+    type_headers = [f"{t}s ({len(by_type[t])})" for t in type_order]
+
+    lines.append("## Navigation")
+    lines.append("")
+    lines.append("| Assignee | " + " | ".join(type_headers) + " | Total |")
+    lines.append("|----------|" + "|".join(["-------"] * len(type_order)) + "|-------|")
+    for name in all_names:
+        cols = []
+        row_total = 0
+        for itype in type_order:
+            count = len(nav_data[itype].get(name, []))
+            row_total += count
+            if count:
+                anchor = slug(f"{name} {count}")
+                section_label = f"{itype}s".lower()
+                cols.append(f"[{count}](#{anchor})")
+            else:
+                cols.append("—")
+        cols.append(f"**{row_total}**")
+        lines.append(f"| {name} | " + " | ".join(cols) + " |")
+    totals_row = [f"**{len(by_type[t])}**" for t in type_order]
+    totals_row.append(f"**{total}**")
+    lines.append(f"| **Total** | " + " | ".join(totals_row) + " |")
+    lines.append("")
+    lines.append("---")
 
     for itype in type_order:
         type_issues = by_type[itype]

@@ -8,6 +8,24 @@
 
 ---
 
+## Navigation
+
+| Assignee | Bugs (18) | Tasks (32) | Epics (10) | Total |
+|----------|-------|-------|-------|-------|
+| Andy Arnold | — | [20](#andy-arnold-20) | — | **20** |
+| Joseph Antony Vaikath | [2](#joseph-antony-vaikath-2) | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | **4** |
+| Michal Pryc | [2](#michal-pryc-2) | — | [2](#michal-pryc-2) | **4** |
+| Prasad Joshi | [1](#prasad-joshi-1) | — | — | **1** |
+| Scott Seago | [1](#scott-seago-1) | [2](#scott-seago-2) | [2](#scott-seago-2) | **5** |
+| Shubham Dilip Pampattiwar | [7](#shubham-dilip-pampattiwar-7) | — | [2](#shubham-dilip-pampattiwar-2) | **9** |
+| Tareq Alayan | — | [6](#tareq-alayan-6) | [1](#tareq-alayan-1) | **7** |
+| Tiger Kaovilai | [4](#tiger-kaovilai-4) | — | [1](#tiger-kaovilai-1) | **5** |
+| Valentina Ashirova | — | [2](#valentina-ashirova-2) | — | **2** |
+| Wesley Hayutin | [1](#wesley-hayutin-1) | [1](#wesley-hayutin-1) | [1](#wesley-hayutin-1) | **3** |
+| **Total** | **18** | **32** | **10** | **60** |
+
+---
+
 # Bugs (18)
 
 ## Joseph Antony Vaikath (2)
