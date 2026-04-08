@@ -72,8 +72,9 @@ def md_rhel_table(entries):
     if not entries:
         return "_none_\n"
     lines = []
-    lines.append("| Target | Current | Latest Brew | Status | Latest Tested |")
-    lines.append("|--------|---------|-------------|--------|---------------|")
+    target_width = max((len(e["Target"]) for e in entries), default=6) + 2
+    lines.append(f"| {'Target'.ljust(target_width)} | Current | Latest Brew | Status | Latest Tested |")
+    lines.append(f"|{'-' * (target_width + 2)}|---------|-------------|--------|---------------|")
     for e in sorted(entries, key=lambda x: x["Target"]):
         status = e["LatestBrewStatus"]
         badge = f"**{status}**" if status == "Pass" else status
