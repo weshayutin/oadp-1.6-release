@@ -27,6 +27,8 @@ def fetch_rhel_by_minor():
     data = fetch_json(BUILDROOTS_URL)
     by_minor = defaultdict(list)
     for entry in data["Buildroots"]:
+        if not entry.get("Target", "").startswith("rhaos-"):
+            continue
         m = re.search(r"golang-(\d+)\.(\d+)\.(\d+)", entry["Current"])
         if not m:
             continue
