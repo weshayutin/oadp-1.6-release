@@ -10,6 +10,7 @@ with their associated upstream Velero GitHub issues and labels.
 import os
 import sys
 import json
+import base64
 import requests
 import re
 import argparse
@@ -49,15 +50,17 @@ class JiraIssue:
 class JiraGitHubReporter:
     """Main class for generating the OADP to Velero issues report"""
     
-    def __init__(self, jira_token: str, github_token: Optional[str] = None):
-        self.jira_base_url = "https://issues.redhat.com"
+    JIRA_SITE = "redhat.atlassian.net"
+
+    def __init__(self, jira_email: str, jira_token: str, github_token: Optional[str] = None):
+        self.jira_base_url = f"https://{self.JIRA_SITE}"
         self.jira_token = jira_token
         self.github_token = github_token
         
-        # Setup session with authentication
+        creds = base64.b64encode(f"{jira_email}:{jira_token}".encode()).decode()
         self.jira_session = requests.Session()
         self.jira_session.headers.update({
-            'Authorization': f'Bearer {jira_token}',
+            'Authorization': f'Basic {creds}',
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         })
@@ -70,27 +73,39 @@ class JiraGitHubReporter:
             })
     
     def search_jira_issues(self, jql: str) -> List[Dict]:
-        """Search for Jira issues using JQL"""
-        url = f"{self.jira_base_url}/rest/api/2/search"
+        """Search for Jira issues using JQL (Cloud /search/jql endpoint)"""
+        url = f"{self.jira_base_url}/rest/api/3/search/jql"
         
-        params = {
-            'jql': jql,
-            'fields': 'summary,status,priority,issuetype,issuelinks,assignee',
-            'expand': 'changelog',
-            'maxResults': 50
-        }
+        all_issues = []
+        next_token = None
         
         print(f"Searching Jira with JQL: {jql}")
-        response = self.jira_session.get(url, params=params)
-        response.raise_for_status()
-        
-        data = response.json()
-        print(f"Found {data['total']} issues")
-        return data['issues']
+        while True:
+            params = {
+                'jql': jql,
+                'fields': 'summary,status,priority,issuetype,issuelinks,assignee',
+                'maxResults': 50
+            }
+            if next_token:
+                params['nextPageToken'] = next_token
+
+            response = self.jira_session.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+            all_issues.extend(data.get('issues', []))
+
+            if data.get('isLast', True):
+                break
+            next_token = data.get('nextPageToken')
+            if not next_token:
+                break
+
+        print(f"Found {len(all_issues)} issues")
+        return all_issues
     
     def get_issue_details(self, issue_key: str) -> Dict:
         """Get detailed information for a specific Jira issue"""
-        url = f"{self.jira_base_url}/rest/api/2/issue/{issue_key}"
+        url = f"{self.jira_base_url}/rest/api/3/issue/{issue_key}"
         
         params = {
             'fields': '*all',
@@ -103,7 +118,7 @@ class JiraGitHubReporter:
     
     def get_remote_issue_links(self, issue_key: str) -> List[Dict]:
         """Get remote issue links for a Jira issue"""
-        url = f"{self.jira_base_url}/rest/api/2/issue/{issue_key}/remotelink"
+        url = f"{self.jira_base_url}/rest/api/3/issue/{issue_key}/remotelink"
         
         try:
             response = self.jira_session.get(url)
@@ -144,8 +159,10 @@ class JiraGitHubReporter:
                         urls = self._extract_github_urls_from_text(obj[field])
                         github_urls.update(urls)
         
-        # Check description and comments for GitHub URLs
-        description = issue_data.get('fields', {}).get('description', '') or ''
+        # Check description for GitHub URLs (v3 API returns ADF, not plain text)
+        description = issue_data.get('fields', {}).get('description') or ''
+        if isinstance(description, dict):
+            description = self._extract_text_from_adf(description)
         urls = self._extract_github_urls_from_text(description)
         github_urls.update(urls)
         
@@ -160,6 +177,26 @@ class JiraGitHubReporter:
         
         return list(github_urls)
     
+    @staticmethod
+    def _extract_text_from_adf(node) -> str:
+        """Recursively extract plain text from an Atlassian Document Format node."""
+        if isinstance(node, str):
+            return node
+        if not isinstance(node, dict):
+            return ''
+        parts = []
+        if node.get('type') == 'text':
+            text = node.get('text', '')
+            for mark in node.get('marks', []):
+                if mark.get('type') == 'link':
+                    href = mark.get('attrs', {}).get('href', '')
+                    if href:
+                        parts.append(href)
+            parts.append(text)
+        for child in node.get('content', []):
+            parts.append(JiraGitHubReporter._extract_text_from_adf(child))
+        return ' '.join(parts)
+
     def _extract_github_urls_from_text(self, text: str) -> List[str]:
         """Extract GitHub URLs from text using regex"""
         if not text:
@@ -406,7 +443,7 @@ class JiraGitHubReporter:
                 issue_type=fields.get('issuetype', {}).get('name', 'Unknown'),
                 assignee=assignee,
                 github_issues=github_issues,
-                url=f"https://issues.redhat.com/browse/{issue_key}"
+                url=f"https://{self.JIRA_SITE}/browse/{issue_key}"
             )
             
             processed_issues.append(jira_issue)
@@ -851,7 +888,8 @@ Examples:
   %(prog)s --dry-run
   
 Environment Variables:
-  JIRA_TOKEN              Required: Jira authentication token
+  JIRA_EMAIL              Required: Jira account email (e.g. user@redhat.com)
+  JIRA_NEW_TOKEN          Required: Jira API token for redhat.atlassian.net
   GITHUB_TOKEN            Optional: GitHub personal access token (recommended)
         """
     )
@@ -892,13 +930,15 @@ Environment Variables:
     
     args = parser.parse_args()
     
-    # Get authentication tokens from environment variables
-    jira_token = os.getenv('JIRA_TOKEN')
-    github_token = os.getenv('GITHUB_TOKEN')  # Optional
+    jira_email = os.getenv('JIRA_EMAIL')
+    jira_token = os.getenv('JIRA_NEW_TOKEN')
+    github_token = os.getenv('GITHUB_TOKEN')
     
-    if not jira_token:
-        print("Error: JIRA_TOKEN environment variable is required")
-        print("Set it with: export JIRA_TOKEN='your_jira_token_here'")
+    if not jira_email or not jira_token:
+        print("Error: JIRA_EMAIL and JIRA_NEW_TOKEN environment variables are required")
+        print("Set them with:")
+        print("  export JIRA_EMAIL='you@redhat.com'")
+        print("  export JIRA_NEW_TOKEN='your_atlassian_api_token'")
         sys.exit(1)
     
     if not github_token:
@@ -910,13 +950,14 @@ Environment Variables:
         print("Configuration:")
         print(f"  Output file: {args.output}")
         print(f"  JQL query: {args.jql}")
+        print(f"  Jira email: {jira_email}")
         print(f"  Jira token: {'✓ Set' if jira_token else '✗ Not set'}")
         print(f"  GitHub token: {'✓ Set' if github_token else '✗ Not set'}")
         return
     
     try:
         # Create reporter and generate report
-        reporter = JiraGitHubReporter(jira_token, github_token)
+        reporter = JiraGitHubReporter(jira_email, jira_token, github_token)
         markdown_content = reporter.generate_report(args.jql)
         
         # Write to file

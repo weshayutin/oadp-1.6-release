@@ -2,7 +2,7 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in (MODIFIED, Closed) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 60  
+**Total issues:** 58  
 **Assignees:** 11  
 **Generated:** 2026-04-08
 
@@ -10,30 +10,29 @@
 
 ## Navigation
 
-| Assignee | Bugs (17) | Tasks (33) | Epics (10) | Total |
+| Assignee | Bugs (15) | Tasks (33) | Epics (10) | Total |
 |----------|-------|-------|-------|-------|
 | Andy Arnold | — | [20](#andy-arnold-20) | — | **20** |
-| Joseph Antony Vaikath | [2](#joseph-antony-vaikath-2) | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | **4** |
+| Joseph Antony Vaikath | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | **3** |
 | Michal Pryc | [2](#michal-pryc-2) | — | [2](#michal-pryc-2) | **4** |
 | Prasad Joshi | [1](#prasad-joshi-1) | — | — | **1** |
 | Scott Seago | — | [2](#scott-seago-2) | [2](#scott-seago-2) | **4** |
 | Shruti Deshpande | — | [1](#shruti-deshpande-1) | — | **1** |
 | Shubham Dilip Pampattiwar | [7](#shubham-dilip-pampattiwar-7) | — | [2](#shubham-dilip-pampattiwar-2) | **9** |
 | Tareq Alayan | — | [6](#tareq-alayan-6) | [1](#tareq-alayan-1) | **7** |
-| Tiger Kaovilai | [4](#tiger-kaovilai-4) | — | [1](#tiger-kaovilai-1) | **5** |
+| Tiger Kaovilai | [3](#tiger-kaovilai-3) | — | [1](#tiger-kaovilai-1) | **4** |
 | Valentina Ashirova | — | [2](#valentina-ashirova-2) | — | **2** |
 | Wesley Hayutin | [1](#wesley-hayutin-1) | [1](#wesley-hayutin-1) | [1](#wesley-hayutin-1) | **3** |
-| **Total** | **17** | **33** | **10** | **60** |
+| **Total** | **15** | **33** | **10** | **58** |
 
 ---
 
-# Bugs (17)
+# Bugs (15)
 
-## Joseph Antony Vaikath (2)
+## Joseph Antony Vaikath (1)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-3378](https://redhat.atlassian.net/browse/OADP-3378) | Wrong/ misleading certificate error log for backup when certificate check is disabled | Normal | New | 2024-01-23 | cee.neXT, oadp_encryption, triaged |
 | [OADP-3692](https://redhat.atlassian.net/browse/OADP-3692) | Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Minor | ASSIGNED | 2024-03-08 | oadp_crd_api_version_bump, triaged |
 
 ## Michal Pryc (2)
@@ -61,11 +60,10 @@
 | [OADP-5171](https://redhat.atlassian.net/browse/OADP-5171) | BSL status.message field shouldn't have the http response as output when bucket doesn't exist | Minor | POST | 2024-11-04 | oadp_bsl, oadp_upstream_bug_fix, triaged |
 | [OADP-6740](https://redhat.atlassian.net/browse/OADP-6740) | [Upstream testing] VolumeSnapshotContent resources are left out in cluster with VGS path | Undefined | New | 2025-09-25 | oadp_upstream_bug_fix, triaged |
 
-## Tiger Kaovilai (4)
+## Tiger Kaovilai (3)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6896](https://redhat.atlassian.net/browse/OADP-6896) | Node agent pod restarts cancel all DataUploads across all nodes, blocking backup queue in OADP 1.5 | Major | New | 2025-10-23 | oadp_upstream_bug_fix, oadp_upstream_milestone_v1.18, rosa-impact, triaged |
 | [OADP-5729](https://redhat.atlassian.net/browse/OADP-5729) | FSBackup doesn't restore ImageStreamTag | Minor | New | 2025-02-28 |  |
 | [OADP-5777](https://redhat.atlassian.net/browse/OADP-5777) | Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Undefined | POST | 2025-03-10 | oadp_dpa, triaged |
 | [OADP-5829](https://redhat.atlassian.net/browse/OADP-5829) | wrong S3 identifier (resticIdentifier) while using a kopia BackupRepository  | Undefined | POST | 2025-03-20 | oadp_upstream_bug_fix |
