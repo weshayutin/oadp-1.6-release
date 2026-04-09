@@ -4,7 +4,7 @@
 
 **Total issues:** 58  
 **Assignees:** 11  
-**Generated:** 2026-04-08
+**Generated:** 2026-04-09
 
 ---
 
@@ -52,9 +52,9 @@
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6699](https://redhat.atlassian.net/browse/OADP-6699) | Ignore OVN-K and multus annotations while backing-up/restoring pods | Blocker | New | 2025-09-18 | triaged |
+| [OADP-6699](https://redhat.atlassian.net/browse/OADP-6699) | Ignore OVN-K and multus annotations while backing-up/restoring pods | Blocker | POST | 2025-09-18 | triaged |
 | [OADP-4743](https://redhat.atlassian.net/browse/OADP-4743) | DataMover restore partially fails when node selector spec is used | Critical | POST | 2024-08-27 | oadp_datamover, oadp_upstream_bug_fix, triaged |
-| [OADP-7381](https://redhat.atlassian.net/browse/OADP-7381) | [CSI] VGS restore fails when used with Ceph RBD storage class  | Critical | POST | 2026-02-02 |  |
+| [OADP-7381](https://redhat.atlassian.net/browse/OADP-7381) | [CSI] VGS restore fails when used with Ceph RBD storage class  | Critical | POST | 2026-02-02 | triaged |
 | [OADP-6880](https://redhat.atlassian.net/browse/OADP-6880) | VolumeGroupSnapshots doesn't respect volumePolicies | Major | POST | 2025-10-20 | oadp_upstream_bug_fix, triaged |
 | [OADP-6879](https://redhat.atlassian.net/browse/OADP-6879) | Volume policy is in low performance when there are lots of pods and PVCs in the cluster | Normal | POST | 2025-10-20 | oadp_upstream_bug_fix, triaged |
 | [OADP-5171](https://redhat.atlassian.net/browse/OADP-5171) | BSL status.message field shouldn't have the http response as output when bucket doesn't exist | Minor | POST | 2024-11-04 | oadp_bsl, oadp_upstream_bug_fix, triaged |
@@ -136,7 +136,7 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-2425](https://redhat.atlassian.net/browse/OADP-2425) | Document OADP NFS plugin for full NFS support | Major | New | 2023-08-20 |  |
-| [OADP-7028](https://redhat.atlassian.net/browse/OADP-7028) | [DOC] OADP 1.5 Release Notes DITA error | Normal | Testing | 2025-11-26 | dita-error |
+| [OADP-7028](https://redhat.atlassian.net/browse/OADP-7028) | [DOC] OADP 1.5 Release Notes DITA error | Normal | Testing | 2025-11-26 | CQA, CQreview_non-negotiable, CQreview_pre-migration, content-strategy, dita-error |
 
 ## Wesley Hayutin (1)
 
@@ -190,4 +190,3 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6580](https://redhat.atlassian.net/browse/OADP-6580) | OADP 1.6.0 Release Epic, released with >= OCP 4.22 | Critical | New | 2025-08-15 | rosa-impact |
-
