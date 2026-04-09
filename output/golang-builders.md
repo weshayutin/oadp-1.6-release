@@ -1,6 +1,6 @@
 # Golang Builders — RHEL & Konveyor
 
-> Go 1.26 .. 1.24 (latest 3 minor releases) | Generated 2026-04-08 16:09 UTC
+> Go 1.26 .. 1.24 (latest 3 minor releases) | Generated 2026-04-09 19:41 UTC
 >
 > Sources: [RHEL Buildroots Grid](https://dbenoit.pages.redhat.com/grid/buildroots.json) · [Konveyor Builder](https://quay.io/repository/konveyor/builder?tab=tags)
 
@@ -90,4 +90,3 @@ _none_
 | `v1.24.1` | 1.24.1 | ubi9 | Sat, 29 Mar 2025 00:37:33 -0000 |
 | `ubi9-v1.24.0` | 1.24.0 | ubi9 | Sat, 01 Mar 2025 00:30:57 -0000 |
 | `v1.24.0` | 1.24.0 | ubi9 | Sat, 01 Mar 2025 00:39:25 -0000 |
-

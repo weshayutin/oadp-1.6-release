@@ -22,6 +22,10 @@ import urllib.request
 from collections import defaultdict
 from datetime import datetime, timezone
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+OUTPUT_DIR = os.path.join(REPO_ROOT, "output")
+
 JIRA_SITE = "redhat.atlassian.net"
 API_BASE = f"https://{JIRA_SITE}/rest/api/3"
 DEFAULT_VERSION = "OADP 1.6.0"
@@ -212,8 +216,13 @@ def generate_markdown(version, issues, total):
 def main():
     parser = argparse.ArgumentParser(description="Generate OADP bug report from Jira")
     parser.add_argument("--version", "-v", default=DEFAULT_VERSION, help="fixVersion to query")
-    parser.add_argument("--output", "-o", default=None, help="output markdown file (default: stdout)")
+    parser.add_argument("--output", "-o", default=None,
+                        help="output markdown file (default: output/<version>-bugs.md)")
     args = parser.parse_args()
+
+    if args.output is None:
+        version_slug = args.version.lower().replace(" ", "-")
+        args.output = os.path.join(OUTPUT_DIR, f"{version_slug}-bugs.md")
 
     auth = get_auth_header()
     jql = build_jql(args.version, EXCLUDED_STATUSES)
@@ -224,12 +233,10 @@ def main():
 
     md = generate_markdown(args.version, issues, total)
 
-    if args.output:
-        with open(args.output, "w") as f:
-            f.write(md)
-        print(f"Wrote {args.output}", file=sys.stderr)
-    else:
-        print(md)
+    os.makedirs(os.path.dirname(args.output), exist_ok=True)
+    with open(args.output, "w") as f:
+        f.write(md)
+    print(f"Wrote {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":

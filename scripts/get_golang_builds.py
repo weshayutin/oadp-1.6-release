@@ -5,11 +5,17 @@ Fetch the latest available Go builds from:
   - Konveyor builder images: https://quay.io/repository/konveyor/builder
 """
 
+import argparse
 import json
+import os
 import re
 import sys
 import urllib.request
 from collections import defaultdict
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+OUTPUT_DIR = os.path.join(REPO_ROOT, "output")
 
 BUILDROOTS_URL = "https://dbenoit.pages.redhat.com/grid/buildroots.json"
 KONVEYOR_API = "https://quay.io/api/v1/repository/konveyor/builder/tag/"
@@ -102,6 +108,12 @@ def md_konveyor_table(entries):
 def main():
     from datetime import datetime, timezone
 
+    parser = argparse.ArgumentParser(description="Fetch latest Go builds for RHEL & Konveyor")
+    parser.add_argument("--output", "-o",
+                        default=os.path.join(OUTPUT_DIR, "golang-builders.md"),
+                        help="output markdown file (default: output/golang-builders.md)")
+    args = parser.parse_args()
+
     errors = []
 
     try:
@@ -162,7 +174,11 @@ def main():
         for e in errors:
             out.append(f"- {e}")
 
-    print("\n".join(out))
+    content = "\n".join(out)
+    os.makedirs(os.path.dirname(args.output), exist_ok=True)
+    with open(args.output, "w") as f:
+        f.write(content)
+    print(f"Wrote {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":

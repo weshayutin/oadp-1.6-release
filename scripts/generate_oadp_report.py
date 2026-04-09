@@ -18,6 +18,10 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from urllib.parse import urlparse
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(SCRIPT_DIR)
+OUTPUT_DIR = os.path.join(REPO_ROOT, "output")
+
 # Import content checker for duplicate detection
 try:
     from content_checker import MarkdownContentChecker, ParsedRow
@@ -400,8 +404,12 @@ class JiraGitHubReporter:
             print("Falling back to manual population - update the script with issue numbers")
             return []
 
-    def generate_report(self, jql: str) -> str:
+    def generate_report(self, jql: str, output_file: str = None) -> str:
         """Generate the complete markdown report"""
+        if output_file is None:
+            output_file = os.path.join(OUTPUT_DIR, "oadp_velero_issues.md")
+        self._output_file = output_file
+
         print("Starting OADP to Velero issues report generation...")
         
         # Search for Jira issues
@@ -451,7 +459,7 @@ class JiraGitHubReporter:
         # Check for content changes
         print("\n" + "-"*50)
         print("Checking for content changes...")
-        new_issues, updated_issues, unchanged_issues = self._check_content_changes(processed_issues, "oadp_velero_issues.md")
+        new_issues, updated_issues, unchanged_issues = self._check_content_changes(processed_issues, output_file)
         
         # Get Velero 1.18 milestone issues
         velero_milestone_issues = self.get_velero_milestone_issues('v1.18')
@@ -603,7 +611,7 @@ class JiraGitHubReporter:
         """Load existing candidate table and return mapping of Jira key to row number"""
         existing_rows = {}
         try:
-            with open("oadp_velero_issues.md", 'r', encoding='utf-8') as f:
+            with open(self._output_file, 'r', encoding='utf-8') as f:
                 content = f.read()
             
             lines = content.split('\n')
@@ -647,7 +655,7 @@ class JiraGitHubReporter:
         """Load existing milestone table and return mapping of GitHub issue number to row number"""
         existing_rows = {}
         try:
-            with open("oadp_velero_issues.md", 'r', encoding='utf-8') as f:
+            with open(self._output_file, 'r', encoding='utf-8') as f:
                 content = f.read()
             
             lines = content.split('\n')
@@ -896,8 +904,8 @@ Environment Variables:
     
     parser.add_argument(
         '--output', '-o',
-        default='oadp_velero_issues.md',
-        help='Output markdown file name (default: oadp_velero_issues.md)'
+        default=os.path.join(OUTPUT_DIR, 'oadp_velero_issues.md'),
+        help='Output markdown file (default: output/oadp_velero_issues.md)'
     )
     
     parser.add_argument(
@@ -958,7 +966,8 @@ Environment Variables:
     try:
         # Create reporter and generate report
         reporter = JiraGitHubReporter(jira_email, jira_token, github_token)
-        markdown_content = reporter.generate_report(args.jql)
+        os.makedirs(os.path.dirname(args.output), exist_ok=True)
+        markdown_content = reporter.generate_report(args.jql, output_file=args.output)
         
         # Write to file
         with open(args.output, 'w', encoding='utf-8') as f:
