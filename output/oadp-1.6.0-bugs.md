@@ -2,15 +2,15 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in (MODIFIED, Closed) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 54  
+**Total issues:** 47  
 **Assignees:** 11  
-**Generated:** 2026-04-09
+**Generated:** 2026-04-13
 
 ---
 
 ## Navigation
 
-| Assignee | Bugs (11) | Tasks (33) | Epics (10) | Total |
+| Assignee | Bugs (6) | Tasks (32) | Epics (9) | Total |
 |----------|-------|-------|-------|-------|
 | Andy Arnold | — | [20](#andy-arnold-20) | — | **20** |
 | Joseph Antony Vaikath | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | **3** |
@@ -18,16 +18,16 @@
 | Prasad Joshi | [1](#prasad-joshi-1) | — | — | **1** |
 | Scott Seago | — | [2](#scott-seago-2) | [2](#scott-seago-2) | **4** |
 | Shruti Deshpande | — | [1](#shruti-deshpande-1) | — | **1** |
-| Shubham Dilip Pampattiwar | [7](#shubham-dilip-pampattiwar-7) | — | [2](#shubham-dilip-pampattiwar-2) | **9** |
+| Shubham Dilip Pampattiwar | [2](#shubham-dilip-pampattiwar-2) | — | [2](#shubham-dilip-pampattiwar-2) | **4** |
 | Tareq Alayan | — | [6](#tareq-alayan-6) | [1](#tareq-alayan-1) | **7** |
-| Tiger Kaovilai | [1](#tiger-kaovilai-1) | — | [1](#tiger-kaovilai-1) | **2** |
-| Valentina Ashirova | — | [2](#valentina-ashirova-2) | — | **2** |
+| Tiger Kaovilai | [1](#tiger-kaovilai-1) | — | — | **1** |
+| Valentina Ashirova | — | [1](#valentina-ashirova-1) | — | **1** |
 | Wesley Hayutin | — | [1](#wesley-hayutin-1) | [1](#wesley-hayutin-1) | **2** |
-| **Total** | **11** | **33** | **10** | **54** |
+| **Total** | **6** | **32** | **9** | **47** |
 
 ---
 
-# Bugs (11)
+# Bugs (6)
 
 ## Joseph Antony Vaikath (1)
 
@@ -47,16 +47,11 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-7673](https://redhat.atlassian.net/browse/OADP-7673) | CLONE - DPA goes in error state when node affinity is specified with podConfig | Major | POST | 2026-03-31 | oadp_operator_improvements, triaged |
 
-## Shubham Dilip Pampattiwar (7)
+## Shubham Dilip Pampattiwar (2)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6699](https://redhat.atlassian.net/browse/OADP-6699) | Ignore OVN-K and multus annotations while backing-up/restoring pods | Blocker | POST | 2025-09-18 | triaged |
-| [OADP-4743](https://redhat.atlassian.net/browse/OADP-4743) | DataMover restore partially fails when node selector spec is used | Critical | POST | 2024-08-27 | oadp_datamover, oadp_upstream_bug_fix, triaged |
-| [OADP-7381](https://redhat.atlassian.net/browse/OADP-7381) | [CSI] VGS restore fails when used with Ceph RBD storage class  | Critical | POST | 2026-02-02 | triaged |
-| [OADP-6880](https://redhat.atlassian.net/browse/OADP-6880) | VolumeGroupSnapshots doesn't respect volumePolicies | Major | POST | 2025-10-20 | oadp_upstream_bug_fix, triaged |
-| [OADP-6879](https://redhat.atlassian.net/browse/OADP-6879) | Volume policy is in low performance when there are lots of pods and PVCs in the cluster | Normal | POST | 2025-10-20 | oadp_upstream_bug_fix, triaged |
-| [OADP-5171](https://redhat.atlassian.net/browse/OADP-5171) | BSL status.message field shouldn't have the http response as output when bucket doesn't exist | Minor | POST | 2024-11-04 | oadp_bsl, oadp_upstream_bug_fix, triaged |
 | [OADP-6740](https://redhat.atlassian.net/browse/OADP-6740) | [Upstream testing] VolumeSnapshotContent resources are left out in cluster with VGS path | Undefined | New | 2025-09-25 | oadp_upstream_bug_fix, triaged |
 
 ## Tiger Kaovilai (1)
@@ -65,7 +60,7 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5729](https://redhat.atlassian.net/browse/OADP-5729) | FSBackup doesn't restore ImageStreamTag | Minor | New | 2025-02-28 |  |
 
-# Tasks (33)
+# Tasks (32)
 
 ## Andy Arnold (20)
 
@@ -109,7 +104,7 @@
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-7690](https://redhat.atlassian.net/browse/OADP-7690) | [DOC] - New BSL default needs DPA restart | Normal | New | 2026-04-07 | Scale&Perf-QE, triaged |
+| [OADP-7690](https://redhat.atlassian.net/browse/OADP-7690) | [DOC] - New BSL default needs DPA restart | Normal | In Progress | 2026-04-07 | Scale&Perf-QE, triaged |
 
 ## Tareq Alayan (6)
 
@@ -122,12 +117,11 @@
 | [OADP-5164](https://redhat.atlassian.net/browse/OADP-5164) | (QE) [OADP 1.6.0] Run the tests when oadp is pushed to STAGING | Undefined | New | 2024-10-31 |  |
 | [OADP-5165](https://redhat.atlassian.net/browse/OADP-5165) | (QE) [OADP 1.6.0] Push to REL_PREP  | Undefined | New | 2024-10-31 |  |
 
-## Valentina Ashirova (2)
+## Valentina Ashirova (1)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-2425](https://redhat.atlassian.net/browse/OADP-2425) | Document OADP NFS plugin for full NFS support | Major | New | 2023-08-20 |  |
-| [OADP-7028](https://redhat.atlassian.net/browse/OADP-7028) | [DOC] OADP 1.5 Release Notes DITA error | Normal | Testing | 2025-11-26 | CQA, CQreview_non-negotiable, CQreview_pre-migration, content-strategy, dita-error |
 
 ## Wesley Hayutin (1)
 
@@ -135,7 +129,7 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6138](https://redhat.atlassian.net/browse/OADP-6138) | (not doc) Kopia repository options settings | Normal | New | 2025-05-15 | Kopia, authentication-client, data-compression, dpa, encryption, feature-enhancement, future_feature |
 
-# Epics (10)
+# Epics (9)
 
 ## Joseph Antony Vaikath (1)
 
@@ -155,13 +149,13 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6579](https://redhat.atlassian.net/browse/OADP-6579) | Concurrent Backup Processing Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, oadp_parallel_backup, oadp_upstream_bug_fix, triaged |
-| [OADP-6584](https://redhat.atlassian.net/browse/OADP-6584) | Support for Storage Agnostic qcow2 Incremental Backup | Critical | In Progress | 2025-08-15 | oadp_cnv, triaged |
+| [OADP-6584](https://redhat.atlassian.net/browse/OADP-6584) | Tech-Preview - Support for Storage Agnostic qcow2 Incremental Backup | Critical | In Progress | 2025-08-15 | oadp_cnv, triaged |
 
 ## Shubham Dilip Pampattiwar (2)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6581](https://redhat.atlassian.net/browse/OADP-6581) | VolumeGroupSnapshot Support Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, oadp_upstream_bug_fix, oadp_vgs, triaged |
+| [OADP-6581](https://redhat.atlassian.net/browse/OADP-6581) | Tech-Preview  - VolumeGroupSnapshot Support Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, oadp_upstream_bug_fix, oadp_vgs, triaged |
 | [OADP-7194](https://redhat.atlassian.net/browse/OADP-7194) | Add OADP Toolset to OpenShift MCP Server | Major | In Progress | 2026-01-06 | FPC:TODO-Close-ALL-Epics, FPC:TODO-Create-Delivery-Epics, applied-ai, oadp_pm_request |
 
 ## Tareq Alayan (1)
@@ -169,12 +163,6 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5159](https://redhat.atlassian.net/browse/OADP-5159) | (QE) OADP-OADP 1.6.0 release activities | Undefined | New | 2024-10-31 |  |
-
-## Tiger Kaovilai (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-7417](https://redhat.atlassian.net/browse/OADP-7417) | Scrub oadp / velero code for TLS Config | Blocker | New | 2026-02-03 | oadp_upstream_bug_fix, triaged |
 
 ## Wesley Hayutin (1)
 
