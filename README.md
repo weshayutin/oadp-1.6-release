@@ -8,6 +8,7 @@ Scripts and generated reports for tracking the OADP 1.6 release.
 |--------|-------------|-------|
 | `scripts/generate_oadp_report.py` | Queries Jira for OADP issues and maps them to upstream Velero GitHub issues | `python scripts/generate_oadp_report.py` |
 | `scripts/get_oadp_bugs.py` | Queries Jira for OADP bugs/tasks/epics by fixVersion and generates a grouped report | `python scripts/get_oadp_bugs.py` |
+| `scripts/get_oadp_bugs.py --qe` | QE-focused report: ON_QA/VERIFIED issues grouped by QA Contact | `python scripts/get_oadp_bugs.py --qe` |
 | `scripts/get_golang_builds.py` | Fetches latest Go builds from RHEL buildroots and Konveyor builder images | `python scripts/get_golang_builds.py` |
 | `scripts/content_checker.py` | Library used by `generate_oadp_report.py` to detect duplicate content | imported automatically |
 
@@ -19,6 +20,7 @@ All generated reports are written to the `output/` directory.
 |------|-------------|-------------|
 | [`output/oadp_velero_issues.md`](output/oadp_velero_issues.md) | `generate_oadp_report.py` | OADP Jira to upstream Velero issue mapping with milestone cross-reference |
 | [`output/oadp-1.6.0-bugs.md`](output/oadp-1.6.0-bugs.md) | `get_oadp_bugs.py` | OADP 1.6.0 bugs, tasks, and epics grouped by type and assignee |
+| [`output/oadp-1.6.0-qe.md`](output/oadp-1.6.0-qe.md) | `get_oadp_bugs.py --qe` | OADP 1.6.0 ON_QA/VERIFIED issues grouped by QA Contact |
 | [`output/golang-builders.md`](output/golang-builders.md) | `get_golang_builds.py` | Latest Go builder versions for RHEL and Konveyor |
 
 ## Environment Variables
@@ -39,6 +41,7 @@ export GITHUB_TOKEN='your_github_token'
 
 python scripts/generate_oadp_report.py
 python scripts/get_oadp_bugs.py
+python scripts/get_oadp_bugs.py --qe
 python scripts/get_golang_builds.py
 ```
 
