@@ -30,7 +30,7 @@ OUTPUT_DIR = os.path.join(REPO_ROOT, "output")
 JIRA_SITE = "redhat.atlassian.net"
 API_BASE = f"https://{JIRA_SITE}/rest/api/3"
 DEFAULT_VERSION = "OADP 1.6.0"
-EXCLUDED_STATUSES = ("MODIFIED", "Closed")
+EXCLUDED_STATUSES = ("MODIFIED", "Closed", "ON_QA", "Dev Complete")
 QE_STATUSES = ("ON_QA", "VERIFIED")
 QA_CONTACT_FIELD = "customfield_10470"
 PAGE_SIZE = 100
@@ -100,7 +100,7 @@ ISSUE_TYPE_ORDER = {t: i for i, t in enumerate(ISSUE_TYPES)}
 
 
 def build_jql(version, excluded_statuses, issue_types=ISSUE_TYPES):
-    statuses = ", ".join(excluded_statuses)
+    statuses = ", ".join(f'"{s}"' for s in excluded_statuses)
     types = ", ".join(issue_types)
     return (
         f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
