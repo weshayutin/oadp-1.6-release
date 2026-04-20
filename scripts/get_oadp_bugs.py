@@ -31,7 +31,7 @@ JIRA_SITE = "redhat.atlassian.net"
 API_BASE = f"https://{JIRA_SITE}/rest/api/3"
 DEFAULT_VERSION = "OADP 1.6.0"
 EXCLUDED_STATUSES = ("MODIFIED", "Closed", "ON_QA", "Dev Complete")
-QE_STATUSES = ("ON_QA", "VERIFIED")
+QE_STATUSES = ("ON_QA",)
 QA_CONTACT_FIELD = "customfield_10470"
 PAGE_SIZE = 100
 

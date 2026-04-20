@@ -1,6 +1,6 @@
-# OADP 1.6.0 QE Report (ON_QA, VERIFIED)
+# OADP 1.6.0 QE Report (ON_QA)
 
-**JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status in ("ON_QA", "VERIFIED") ORDER BY priority DESC, created DESC`
+**JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status in ("ON_QA") ORDER BY priority DESC, created DESC`
 
 **Total issues:** 23  
 **QA Contacts:** 7  
@@ -32,7 +32,7 @@
 | [OADP-6764](https://redhat.atlassian.net/browse/OADP-6764) | Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path | Critical | ON_QA | 2025-09-26 | filesystem-backup, need-rh-and-ibm-qe, oadp_upstream_bug_fix, openshift, privileged-context, triaged, upstream |
 | [OADP-6955](https://redhat.atlassian.net/browse/OADP-6955) | Fix the Job build error when BackupRepository name longer than 63 | Critical | ON_QA | 2025-10-30 | need-rh-and-ibm-qe, oadp_upstream_bug_fix, rosa-impact, triaged |
 | [OADP-6911](https://redhat.atlassian.net/browse/OADP-6911) | [Upstream] Restore CR Completed while PodVolumeRestore CR is InProgress | Major | ON_QA | 2025-10-27 | oadp_upstream_bug_fix, triaged, upstream |
-| [OADP-7382](https://redhat.atlassian.net/browse/OADP-7382) | NonAdminController reports reconciler error due to new backup phases  | Major | ON_QA | 2026-02-02 | need-rh-and-ibm-qe |
+| [OADP-7382](https://redhat.atlassian.net/browse/OADP-7382) | NonAdminController reports reconciler error due to new backup phases  | Major | ON_QA | 2026-02-02 | need-rh-and-ibm-qe, triaged |
 | [OADP-3378](https://redhat.atlassian.net/browse/OADP-3378) | Wrong/ misleading certificate error log for backup when certificate check is disabled | Normal | ON_QA | 2024-01-23 | cee.neXT, need-rh-and-ibm-qe, oadp_encryption, triaged |
 
 ## David Vaanunu (1)
@@ -48,7 +48,7 @@
 | [OADP-4668](https://redhat.atlassian.net/browse/OADP-4668) | Make using Velero CLI via velero deployment with caCert simple. | Critical | ON_QA | 2024-08-07 | oadp_cli, triaged |
 | [OADP-6896](https://redhat.atlassian.net/browse/OADP-6896) | Node agent pod restarts cancel all DataUploads across all nodes, blocking backup queue in OADP 1.5 | Major | ON_QA | 2025-10-23 | oadp_upstream_bug_fix, oadp_upstream_milestone_v1.18, rosa-impact, triaged |
 | [OADP-6879](https://redhat.atlassian.net/browse/OADP-6879) | Volume policy is in low performance when there are lots of pods and PVCs in the cluster | Normal | ON_QA | 2025-10-20 | oadp_upstream_bug_fix, triaged |
-| [OADP-5829](https://redhat.atlassian.net/browse/OADP-5829) | wrong S3 identifier (resticIdentifier) while using a kopia BackupRepository  | Undefined | ON_QA | 2025-03-20 | oadp_upstream_bug_fix |
+| [OADP-5829](https://redhat.atlassian.net/browse/OADP-5829) | wrong S3 identifier (resticIdentifier) while using a kopia BackupRepository  | Undefined | ON_QA | 2025-03-20 | oadp_upstream_bug_fix, triaged |
 | [OADP-7132](https://redhat.atlassian.net/browse/OADP-7132) | openshift-velero-plugin panics with 'concurrent map writes' | Undefined | ON_QA | 2025-12-16 | customer-bug, customer-case, triaged |
 
 ## Prasad Joshi (4)

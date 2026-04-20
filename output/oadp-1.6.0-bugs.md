@@ -2,7 +2,7 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 45  
+**Total issues:** 47  
 **Assignees:** 11  
 **Generated:** 2026-04-20
 
@@ -10,9 +10,9 @@
 
 ## Navigation
 
-| Assignee | Bugs (5) | Tasks (31) | Epics (9) | Total |
+| Assignee | Bugs (5) | Tasks (33) | Epics (9) | Total |
 |----------|-------|-------|-------|-------|
-| Andy Arnold | — | [20](#andy-arnold-20) | — | **20** |
+| Andy Arnold | — | [22](#andy-arnold-22) | — | **22** |
 | Joseph Antony Vaikath | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | [1](#joseph-antony-vaikath-1) | **3** |
 | Michal Pryc | [1](#michal-pryc-1) | — | [2](#michal-pryc-2) | **3** |
 | Prasad Joshi | [1](#prasad-joshi-1) | — | — | **1** |
@@ -23,7 +23,7 @@
 | Tiger Kaovilai | [1](#tiger-kaovilai-1) | — | — | **1** |
 | Valentina Ashirova | — | [1](#valentina-ashirova-1) | — | **1** |
 | Wesley Hayutin | — | — | [1](#wesley-hayutin-1) | **1** |
-| **Total** | **5** | **31** | **9** | **45** |
+| **Total** | **5** | **33** | **9** | **47** |
 
 ---
 
@@ -59,13 +59,13 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5729](https://redhat.atlassian.net/browse/OADP-5729) | FSBackup doesn't restore ImageStreamTag | Minor | New | 2025-02-28 |  |
 
-# Tasks (31)
+# Tasks (33)
 
-## Andy Arnold (20)
+## Andy Arnold (22)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6316](https://redhat.atlassian.net/browse/OADP-6316) | [DOC] OADP support for single stack IPv6 | Major | New | 2025-06-26 | 4.20, Documentation, OCP, oadp |
+| [OADP-6316](https://redhat.atlassian.net/browse/OADP-6316) | [DOC] OADP support for single stack IPv6 | Major | New | 2025-06-26 | 4.20, Documentation, OCP, oadp, triaged |
 | [OADP-6673](https://redhat.atlassian.net/browse/OADP-6673) | [DOC] Parallel backups | Major | New | 2025-09-08 |  |
 | [OADP-6708](https://redhat.atlassian.net/browse/OADP-6708) | [DOC] Ignore OVN-K and multus annotations while backing-up/restoring pods | Major | New | 2025-09-22 |  |
 | [OADP-6717](https://redhat.atlassian.net/browse/OADP-6717) | [DOC]  VolumeGroupSnapshot Support Implementation | Major | New | 2025-09-24 |  |
@@ -80,11 +80,13 @@
 | [OADP-7058](https://redhat.atlassian.net/browse/OADP-7058) | [DOC] VMDR (Virtual Machine Data Protection) / Kopia client on VM (CNV) | Major | New | 2025-12-05 |  |
 | [OADP-7059](https://redhat.atlassian.net/browse/OADP-7059) | [DOC] Incremental backups for VM (CNV) | Major | New | 2025-12-05 |  |
 | [OADP-7483](https://redhat.atlassian.net/browse/OADP-7483) | [DOC] Issue with OADP docs navigation | Major | Testing | 2026-02-19 |  |
-| [OADP-6503](https://redhat.atlassian.net/browse/OADP-6503) | [DOC] Improve introduction to clarify purpose of OADP | Normal | New | 2025-08-07 | ContentX_CY25, to-be-triaged |
-| [OADP-6504](https://redhat.atlassian.net/browse/OADP-6504) | [DOC] Improve linkage to other products  | Normal | New | 2025-08-07 | ContentX_CY25, to-be-triaged |
+| [OADP-6503](https://redhat.atlassian.net/browse/OADP-6503) | [DOC] Improve introduction to clarify purpose of OADP | Normal | New | 2025-08-07 | ContentX_CY25, to-be-triaged, triaged |
+| [OADP-6504](https://redhat.atlassian.net/browse/OADP-6504) | [DOC] Improve linkage to other products  | Normal | New | 2025-08-07 | ContentX_CY25, to-be-triaged, triaged |
 | [OADP-7060](https://redhat.atlassian.net/browse/OADP-7060) | [DOC] Improve Overriding Kopia hashing, encryption, and splitter algorithms docs | Normal | New | 2025-12-05 |  |
 | [OADP-7076](https://redhat.atlassian.net/browse/OADP-7076) | [DOC] Impossible Cloud to be added as a supported S3-compatible backup storage provider | Normal | New | 2025-12-10 |  |
 | [OADP-7697](https://redhat.atlassian.net/browse/OADP-7697) | [Documentation for]  Concurrent Backup Processing Implementation | Undefined | New | 2026-04-08 |  |
+| [OADP-7862](https://redhat.atlassian.net/browse/OADP-7862) | [Documentation for]  Virtual Machine File Restore - Kubernetes-native solution for recovering individual files from KubeVirt VM backups | Undefined | New | 2026-04-20 |  |
+| [OADP-7866](https://redhat.atlassian.net/browse/OADP-7866) | [Documentation for]  kubectl-oadp CLI Plugin Implementation | Undefined | New | 2026-04-20 |  |
 
 ## Joseph Antony Vaikath (1)
 
@@ -97,7 +99,7 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-4589](https://redhat.atlassian.net/browse/OADP-4589) | Dataupload object reporting improvements | Major | Testing | 2024-07-25 | triaged |
-| [OADP-6478](https://redhat.atlassian.net/browse/OADP-6478) | Revert selective PVC restore by label PR before rebase after upstream velero  | Undefined | New | 2025-07-30 | oadp_rebase, traiged |
+| [OADP-6478](https://redhat.atlassian.net/browse/OADP-6478) | Revert selective PVC restore by label PR before rebase after upstream velero  | Undefined | New | 2025-07-30 | oadp_rebase, traiged, triaged |
 
 ## Shruti Deshpande (1)
 
@@ -128,13 +130,13 @@
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6544](https://redhat.atlassian.net/browse/OADP-6544) | kubectl-oadp CLI Plugin Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc |
+| [OADP-6544](https://redhat.atlassian.net/browse/OADP-6544) | kubectl-oadp CLI Plugin Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, triaged |
 
 ## Michal Pryc (2)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6864](https://redhat.atlassian.net/browse/OADP-6864) | Virtual Machine File Restore - Kubernetes-native solution for recovering individual files from KubeVirt VM backups | Blocker | In Progress | 2025-10-15 | need-qe-and-doc |
+| [OADP-6864](https://redhat.atlassian.net/browse/OADP-6864) | Virtual Machine File Restore - Kubernetes-native solution for recovering individual files from KubeVirt VM backups | Blocker | In Progress | 2025-10-15 | need-qe-and-doc, triaged |
 | [OADP-6583](https://redhat.atlassian.net/browse/OADP-6583) | OADP Virtual Machine Data Protection (VMDP) Implementation | Undefined | In Progress | 2025-08-15 | need-qe-and-doc, oadp_cnv, triaged |
 
 ## Scott Seago (2)
@@ -149,7 +151,7 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6581](https://redhat.atlassian.net/browse/OADP-6581) | Tech-Preview  - VolumeGroupSnapshot Support Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, oadp_upstream_bug_fix, oadp_vgs, triaged |
-| [OADP-7194](https://redhat.atlassian.net/browse/OADP-7194) | Add OADP Toolset to OpenShift MCP Server | Major | In Progress | 2026-01-06 | FPC:TODO-Close-ALL-Epics, FPC:TODO-Create-Delivery-Epics, applied-ai, oadp_pm_request |
+| [OADP-7194](https://redhat.atlassian.net/browse/OADP-7194) | Add OADP Toolset to OpenShift MCP Server | Major | In Progress | 2026-01-06 | FPC:TODO-Close-ALL-Epics, FPC:TODO-Create-Delivery-Epics, applied-ai, oadp_pm_request, triaged |
 
 ## Tareq Alayan (1)
 
@@ -161,4 +163,4 @@
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-6580](https://redhat.atlassian.net/browse/OADP-6580) | OADP 1.6.0 Release Epic, released with >= OCP 4.22 | Critical | New | 2025-08-15 | rosa-impact |
+| [OADP-6580](https://redhat.atlassian.net/browse/OADP-6580) | OADP 1.6.0 Release Epic, released with >= OCP 4.22 | Critical | New | 2025-08-15 | rosa-impact, triaged |
