@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Query OADP Jira issues (Bugs, Tasks, Epics) for a given fixVersion and
+Query OADP Jira issues (Bugs, Tasks, Epics, Stories) for a given fixVersion and
 generate a markdown report grouped by issue type, then by assignee.
 
 Auth: set JIRA_EMAIL and JIRA_API_TOKEN env vars, or create a ~/.netrc entry
@@ -95,18 +95,29 @@ def jira_search(jql, auth_header, extra_fields=None):
     return issues, len(issues)
 
 
-ISSUE_TYPES = ("Bug", "Task", "Epic")
+ISSUE_TYPES = ("Bug", "Task", "Epic", "Story")
+STORY_STATUSES = ("New", "To Do", "In Progress")
 ISSUE_TYPE_ORDER = {t: i for i, t in enumerate(ISSUE_TYPES)}
 
 
 def build_jql(version, excluded_statuses, issue_types=ISSUE_TYPES):
     statuses = ", ".join(f'"{s}"' for s in excluded_statuses)
-    types = ", ".join(issue_types)
-    return (
-        f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
-        f"AND status not in ({statuses}) "
-        f"ORDER BY priority DESC, created DESC"
-    )
+    non_story_types = ", ".join(t for t in issue_types if t != "Story")
+    story_statuses = ", ".join(f'"{s}"' for s in STORY_STATUSES)
+    parts = []
+    if non_story_types:
+        parts.append(
+            f'(project = OADP AND fixVersion = "{version}" '
+            f"AND issuetype in ({non_story_types}) "
+            f"AND status not in ({statuses}))"
+        )
+    if "Story" in issue_types:
+        parts.append(
+            f'(project = OADP AND fixVersion = "{version}" '
+            f"AND issuetype = Story "
+            f"AND status in ({story_statuses}))"
+        )
+    return " OR ".join(parts) + " ORDER BY priority DESC, created DESC"
 
 
 def build_qe_jql(version, statuses=QE_STATUSES, issue_types=ISSUE_TYPES):
@@ -114,7 +125,7 @@ def build_qe_jql(version, statuses=QE_STATUSES, issue_types=ISSUE_TYPES):
     types = ", ".join(issue_types)
     return (
         f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
-        f'AND status in ({status_list}) '
+        f"AND status in ({status_list}) "
         f"ORDER BY priority DESC, created DESC"
     )
 
@@ -186,18 +197,16 @@ def generate_markdown(version, issues, total, qe_mode=False):
     def slug(text):
         return text.lower().replace(" ", "-").replace("(", "").replace(")", "")
 
-    nav_data = {}
-    for itype in type_order:
-        by_a = defaultdict(list)
-        for issue in by_type[itype]:
-            name = get_contact_name(issue, group_by)
-            by_a[name].append(issue)
-        nav_data[itype] = by_a
+    by_person = defaultdict(lambda: defaultdict(list))
+    for issue in issues:
+        name = get_contact_name(issue, group_by)
+        itype = issue["fields"].get("issuetype", {}).get("name", "Other")
+        by_person[name][itype].append(issue)
 
     all_names = sorted(all_contacts, key=str.lower)
     type_headers = [f"{t}s ({len(by_type[t])})" for t in type_order]
 
-    lines.append("## Navigation")
+    lines.append("## Summary")
     lines.append("")
     lines.append(f"| {group_label} | " + " | ".join(type_headers) + " | Total |")
     lines.append("|----------|" + "|".join(["-------"] * len(type_order)) + "|-------|")
@@ -205,10 +214,10 @@ def generate_markdown(version, issues, total, qe_mode=False):
         cols = []
         row_total = 0
         for itype in type_order:
-            count = len(nav_data[itype].get(name, []))
+            count = len(by_person[name].get(itype, []))
             row_total += count
             if count:
-                anchor = slug(f"{name} {count}")
+                anchor = slug(f"{name}")
                 cols.append(f"[{count}](#{anchor})")
             else:
                 cols.append("—")
@@ -220,28 +229,25 @@ def generate_markdown(version, issues, total, qe_mode=False):
     lines.append("")
     lines.append("---")
 
-    for itype in type_order:
-        type_issues = by_type[itype]
+    for name in all_names:
+        person_total = sum(len(v) for v in by_person[name].values())
         lines.append("")
-        lines.append(f"# {itype}s ({len(type_issues)})")
+        lines.append(f"# {name} ({person_total})")
 
-        by_contact = defaultdict(list)
-        for issue in type_issues:
-            name = get_contact_name(issue, group_by)
-            by_contact[name].append(issue)
-
-        for name in sorted(by_contact.keys(), key=str.lower):
-            issues_for = by_contact[name]
-            issues_for.sort(key=lambda i: (
+        for itype in type_order:
+            type_issues = by_person[name].get(itype, [])
+            if not type_issues:
+                continue
+            type_issues.sort(key=lambda i: (
                 PRIORITY_ORDER.get(i["fields"].get("priority", {}).get("name", "Undefined"), 99),
                 i["fields"]["created"],
             ))
             lines.append("")
-            lines.append(f"## {name} ({len(issues_for)})")
+            lines.append(f"## {itype}s ({len(type_issues)})")
             lines.append("")
             lines.append("| Key | Summary | Priority | Status | Created | Labels |")
             lines.append("|-----|---------|----------|--------|---------|--------|")
-            for issue in issues_for:
+            for issue in type_issues:
                 lines.append(format_issue_row(issue))
 
     return "\n".join(lines) + "\n"
