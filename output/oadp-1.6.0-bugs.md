@@ -2,15 +2,15 @@
 
 **JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 47  
-**Assignees:** 10  
+**Total issues:** 46  
+**Assignees:** 9  
 **Generated:** 2026-04-20
 
 ---
 
 ## Summary
 
-| Assignee | Bugs (3) | Tasks (30) | Epics (9) | Storys (5) | Total |
+| Assignee | Bugs (3) | Tasks (30) | Epics (9) | Storys (4) | Total |
 |----------|-------|-------|-------|-------|-------|
 | Andy Arnold | — | [19](#andy-arnold) | — | [3](#andy-arnold) | **22** |
 | Joseph Antony Vaikath | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | — | **3** |
@@ -19,10 +19,9 @@
 | Shruti Deshpande | — | [1](#shruti-deshpande) | — | — | **1** |
 | Shubham Dilip Pampattiwar | [1](#shubham-dilip-pampattiwar) | — | [2](#shubham-dilip-pampattiwar) | [1](#shubham-dilip-pampattiwar) | **4** |
 | Tareq Alayan | — | [6](#tareq-alayan) | [1](#tareq-alayan) | — | **7** |
-| Tiger Kaovilai | — | — | — | [1](#tiger-kaovilai) | **1** |
 | Valentina Ashirova | — | [1](#valentina-ashirova) | — | — | **1** |
 | Wesley Hayutin | — | — | [1](#wesley-hayutin) | — | **1** |
-| **Total** | **3** | **30** | **9** | **5** | **47** |
+| **Total** | **3** | **30** | **9** | **4** | **46** |
 
 ---
 
@@ -158,14 +157,6 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5159](https://redhat.atlassian.net/browse/OADP-5159) | (QE) OADP-OADP 1.6.0 release activities | Undefined | In Progress | 2024-10-31 |  |
-
-# Tiger Kaovilai (1)
-
-## Storys (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-6739](https://redhat.atlassian.net/browse/OADP-6739) | VolumePolicy support for Phase condition of PVC to allow skipping Pending PVCs | Undefined | In Progress | 2025-09-24 | oadp_upstream_milestone_v1.18, triaged |
 
 # Valentina Ashirova (1)
 
