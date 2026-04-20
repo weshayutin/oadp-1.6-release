@@ -10,6 +10,7 @@ Usage:
     python3 get_oadp_bugs.py                          # defaults to OADP 1.6.0
     python3 get_oadp_bugs.py --version "OADP 1.5.0"
     python3 get_oadp_bugs.py -o oadp-1.6.0-bugs.md   # write to file
+    python3 get_oadp_bugs.py --qe                     # QE report: ON_QA/VERIFIED grouped by QA Contact
 """
 
 import argparse
@@ -30,6 +31,8 @@ JIRA_SITE = "redhat.atlassian.net"
 API_BASE = f"https://{JIRA_SITE}/rest/api/3"
 DEFAULT_VERSION = "OADP 1.6.0"
 EXCLUDED_STATUSES = ("MODIFIED", "Closed")
+QE_STATUSES = ("ON_QA", "VERIFIED")
+QA_CONTACT_FIELD = "customfield_10470"
 PAGE_SIZE = 100
 
 PRIORITY_ORDER = {
@@ -62,10 +65,12 @@ def get_auth_header():
     sys.exit(1)
 
 
-def jira_search(jql, auth_header):
+def jira_search(jql, auth_header, extra_fields=None):
     """Return all matching issues, handling pagination via nextPageToken."""
     issues = []
     fields = "summary,status,priority,created,labels,assignee,issuetype"
+    if extra_fields:
+        fields += "," + ",".join(extra_fields)
     next_token = None
     while True:
         params = {"jql": jql, "maxResults": PAGE_SIZE, "fields": fields}
@@ -104,6 +109,16 @@ def build_jql(version, excluded_statuses, issue_types=ISSUE_TYPES):
     )
 
 
+def build_qe_jql(version, statuses=QE_STATUSES, issue_types=ISSUE_TYPES):
+    status_list = ", ".join(f'"{s}"' for s in statuses)
+    types = ", ".join(issue_types)
+    return (
+        f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
+        f'AND status in ({status_list}) '
+        f"ORDER BY priority DESC, created DESC"
+    )
+
+
 def format_issue_row(issue):
     f = issue["fields"]
     key = issue["key"]
@@ -116,28 +131,51 @@ def format_issue_row(issue):
     return f"| [{key}]({link}) | {summary} | {priority} | {status} | {created} | {labels} |"
 
 
-def generate_markdown(version, issues, total):
+def get_contact_name(issue, group_by="assignee"):
+    """Extract the display name for the given grouping field."""
+    f = issue["fields"]
+    if group_by == "qa_contact":
+        contact = f.get(QA_CONTACT_FIELD)
+        if contact:
+            if isinstance(contact, dict):
+                return contact.get("displayName", contact.get("emailAddress", "Unknown"))
+            return str(contact)
+        return "No QA Contact"
+    assignee = f.get("assignee")
+    return assignee["displayName"] if assignee else "Unassigned"
+
+
+def generate_markdown(version, issues, total, qe_mode=False):
+    group_by = "qa_contact" if qe_mode else "assignee"
+    group_label = "QA Contact" if qe_mode else "Assignee"
+
     by_type = defaultdict(list)
     for issue in issues:
         itype = issue["fields"].get("issuetype", {}).get("name", "Other")
         by_type[itype].append(issue)
 
-    all_assignees = set()
+    all_contacts = set()
     for issue in issues:
-        assignee = issue["fields"].get("assignee")
-        all_assignees.add(assignee["displayName"] if assignee else "Unassigned")
+        all_contacts.add(get_contact_name(issue, group_by))
 
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    excluded = ", ".join(EXCLUDED_STATUSES)
-    jql = build_jql(version, EXCLUDED_STATUSES)
+
+    if qe_mode:
+        included = ", ".join(QE_STATUSES)
+        jql = build_qe_jql(version)
+        title = f"{version} QE Report ({included})"
+    else:
+        excluded = ", ".join(EXCLUDED_STATUSES)
+        jql = build_jql(version, EXCLUDED_STATUSES)
+        title = f"{version} Issues (Excluding {excluded})"
 
     lines = []
-    lines.append(f"# {version} Issues (Excluding {excluded})")
+    lines.append(f"# {title}")
     lines.append("")
     lines.append(f"**JQL:** `{jql}`")
     lines.append("")
     lines.append(f"**Total issues:** {total}  ")
-    lines.append(f"**Assignees:** {len(all_assignees)}  ")
+    lines.append(f"**{group_label}s:** {len(all_contacts)}  ")
     lines.append(f"**Generated:** {now}")
     lines.append("")
     lines.append("---")
@@ -148,22 +186,20 @@ def generate_markdown(version, issues, total):
     def slug(text):
         return text.lower().replace(" ", "-").replace("(", "").replace(")", "")
 
-    # Build per-type assignee data for navigation table
     nav_data = {}
     for itype in type_order:
         by_a = defaultdict(list)
         for issue in by_type[itype]:
-            assignee = issue["fields"].get("assignee")
-            name = assignee["displayName"] if assignee else "Unassigned"
+            name = get_contact_name(issue, group_by)
             by_a[name].append(issue)
         nav_data[itype] = by_a
 
-    all_names = sorted(all_assignees, key=str.lower)
+    all_names = sorted(all_contacts, key=str.lower)
     type_headers = [f"{t}s ({len(by_type[t])})" for t in type_order]
 
     lines.append("## Navigation")
     lines.append("")
-    lines.append("| Assignee | " + " | ".join(type_headers) + " | Total |")
+    lines.append(f"| {group_label} | " + " | ".join(type_headers) + " | Total |")
     lines.append("|----------|" + "|".join(["-------"] * len(type_order)) + "|-------|")
     for name in all_names:
         cols = []
@@ -173,7 +209,6 @@ def generate_markdown(version, issues, total):
             row_total += count
             if count:
                 anchor = slug(f"{name} {count}")
-                section_label = f"{itype}s".lower()
                 cols.append(f"[{count}](#{anchor})")
             else:
                 cols.append("—")
@@ -190,14 +225,13 @@ def generate_markdown(version, issues, total):
         lines.append("")
         lines.append(f"# {itype}s ({len(type_issues)})")
 
-        by_assignee = defaultdict(list)
+        by_contact = defaultdict(list)
         for issue in type_issues:
-            assignee = issue["fields"].get("assignee")
-            name = assignee["displayName"] if assignee else "Unassigned"
-            by_assignee[name].append(issue)
+            name = get_contact_name(issue, group_by)
+            by_contact[name].append(issue)
 
-        for name in sorted(by_assignee.keys(), key=str.lower):
-            issues_for = by_assignee[name]
+        for name in sorted(by_contact.keys(), key=str.lower):
+            issues_for = by_contact[name]
             issues_for.sort(key=lambda i: (
                 PRIORITY_ORDER.get(i["fields"].get("priority", {}).get("name", "Undefined"), 99),
                 i["fields"]["created"],
@@ -218,20 +252,29 @@ def main():
     parser.add_argument("--version", "-v", default=DEFAULT_VERSION, help="fixVersion to query")
     parser.add_argument("--output", "-o", default=None,
                         help="output markdown file (default: output/<version>-bugs.md)")
+    parser.add_argument("--qe", action="store_true",
+                        help="QE report: show ON_QA/VERIFIED issues grouped by QA Contact")
     args = parser.parse_args()
 
     if args.output is None:
         version_slug = args.version.lower().replace(" ", "-")
-        args.output = os.path.join(OUTPUT_DIR, f"{version_slug}-bugs.md")
+        suffix = "qe" if args.qe else "bugs"
+        args.output = os.path.join(OUTPUT_DIR, f"{version_slug}-{suffix}.md")
 
     auth = get_auth_header()
-    jql = build_jql(args.version, EXCLUDED_STATUSES)
+    extra_fields = None
+
+    if args.qe:
+        jql = build_qe_jql(args.version)
+        extra_fields = [QA_CONTACT_FIELD]
+    else:
+        jql = build_jql(args.version, EXCLUDED_STATUSES)
 
     print(f"Querying Jira: {jql}", file=sys.stderr)
-    issues, total = jira_search(jql, auth)
+    issues, total = jira_search(jql, auth, extra_fields=extra_fields)
     print(f"Found {total} issues", file=sys.stderr)
 
-    md = generate_markdown(args.version, issues, total)
+    md = generate_markdown(args.version, issues, total, qe_mode=args.qe)
 
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
     with open(args.output, "w") as f:
