@@ -2,36 +2,35 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 19  
+**Total issues:** 18  
 **QA Contacts:** 7  
-**Generated:** 2026-04-22
+**Generated:** 2026-04-23
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (19) | Total |
+| QA Contact | Bugs (18) | Total |
 |----------|-------|-------|
-| Aziza Karol | [4](#aziza-karol) | **4** |
+| Aziza Karol | [3](#aziza-karol) | **3** |
 | David Vaanunu | [1](#david-vaanunu) | **1** |
 | Md Nadeem | [4](#md-nadeem) | **4** |
 | Prasad Joshi | [3](#prasad-joshi) | **3** |
 | Pratik Mane | [3](#pratik-mane) | **3** |
 | Tareq Alayan | [2](#tareq-alayan) | **2** |
 | Wesley Hayutin | [2](#wesley-hayutin) | **2** |
-| **Total** | **19** | **19** |
+| **Total** | **18** | **18** |
 
 ---
 
-# Aziza Karol (4)
+# Aziza Karol (3)
 
-## Bugs (4)
+## Bugs (3)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6955](https://redhat.atlassian.net/browse/OADP-6955) | Fix the Job build error when BackupRepository name longer than 63 | Critical | ON_QA | 2025-10-30 | need-rh-and-ibm-qe, oadp_upstream_bug_fix, rosa-impact, triaged |
 | [OADP-7382](https://redhat.atlassian.net/browse/OADP-7382) | NonAdminController reports reconciler error due to new backup phases  | Major | ON_QA | 2026-02-02 | need-rh-and-ibm-qe, triaged |
-| [OADP-7673](https://redhat.atlassian.net/browse/OADP-7673) | CLONE - DPA goes in error state when node affinity is specified with podConfig | Major | ON_QA | 2026-03-31 | oadp_operator_improvements, triaged |
 | [OADP-3378](https://redhat.atlassian.net/browse/OADP-3378) | Wrong/ misleading certificate error log for backup when certificate check is disabled | Normal | ON_QA | 2024-01-23 | cee.neXT, need-rh-and-ibm-qe, oadp_encryption, triaged |
 
 # David Vaanunu (1)

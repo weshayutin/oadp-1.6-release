@@ -1,29 +1,27 @@
-# OADP 1.6.0 Issues (Excluding MODIFIED, Closed, ON_QA, Dev Complete)
+# OADP 1.6.0 Issues (Excluding MODIFIED, Closed, ON_QA, Dev Complete, Verified)
 
-**JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
+**JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete", "Verified")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 50  
-**Assignees:** 11  
-**Generated:** 2026-04-22
+**Total issues:** 43  
+**Assignees:** 9  
+**Generated:** 2026-04-23
 
 ---
 
 ## Summary
 
-| Assignee | Bugs (7) | Tasks (31) | Epics (9) | Storys (3) | Total |
+| Assignee | Bugs (1) | Tasks (30) | Epics (9) | Storys (3) | Total |
 |----------|-------|-------|-------|-------|-------|
 | Andy Arnold | [1](#andy-arnold) | [16](#andy-arnold) | — | [2](#andy-arnold) | **19** |
 | Joseph Antony Vaikath | — | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | — | **2** |
-| Michal Pryc | [1](#michal-pryc) | — | [2](#michal-pryc) | — | **3** |
-| Prasad Joshi | — | [1](#prasad-joshi) | — | — | **1** |
+| Michal Pryc | — | — | [2](#michal-pryc) | — | **2** |
 | Scott Seago | — | [2](#scott-seago) | [2](#scott-seago) | — | **4** |
 | Shruti Deshpande | — | [3](#shruti-deshpande) | — | — | **3** |
-| Shubham Dilip Pampattiwar | [3](#shubham-dilip-pampattiwar) | — | [2](#shubham-dilip-pampattiwar) | — | **5** |
+| Shubham Dilip Pampattiwar | — | — | [2](#shubham-dilip-pampattiwar) | — | **2** |
 | Tareq Alayan | — | [6](#tareq-alayan) | [1](#tareq-alayan) | — | **7** |
-| Tiger Kaovilai | [1](#tiger-kaovilai) | — | — | — | **1** |
 | Valentina Ashirova | — | [2](#valentina-ashirova) | — | [1](#valentina-ashirova) | **3** |
-| Wesley Hayutin | [1](#wesley-hayutin) | — | [1](#wesley-hayutin) | — | **2** |
-| **Total** | **7** | **31** | **9** | **3** | **50** |
+| Wesley Hayutin | — | — | [1](#wesley-hayutin) | — | **1** |
+| **Total** | **1** | **30** | **9** | **3** | **43** |
 
 ---
 
@@ -77,13 +75,7 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6544](https://redhat.atlassian.net/browse/OADP-6544) | kubectl-oadp CLI Plugin Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, triaged |
 
-# Michal Pryc (3)
-
-## Bugs (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-7070](https://redhat.atlassian.net/browse/OADP-7070) | Unable to configure spec.configuration.nodeAgent.loadConcurrency.PrepareQueueLength in DPA | Undefined | Verified | 2025-12-09 | oadp_dpa, triaged |
+# Michal Pryc (2)
 
 ## Epics (2)
 
@@ -91,14 +83,6 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6864](https://redhat.atlassian.net/browse/OADP-6864) | Virtual Machine File Restore - Kubernetes-native solution for recovering individual files from KubeVirt VM backups | Blocker | In Progress | 2025-10-15 | need-qe-and-doc, triaged |
 | [OADP-6583](https://redhat.atlassian.net/browse/OADP-6583) | OADP Virtual Machine Data Protection (VMDP) Implementation | Undefined | In Progress | 2025-08-15 | need-qe-and-doc, oadp_cnv, triaged |
-
-# Prasad Joshi (1)
-
-## Tasks (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-7681](https://redhat.atlassian.net/browse/OADP-7681) | (QE) Update LRT test OADP 1.6 for OCP.22 | Undefined | In Progress | 2026-04-02 |  |
 
 # Scott Seago (4)
 
@@ -123,18 +107,10 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-7057](https://redhat.atlassian.net/browse/OADP-7057) | [DOC] VMFR (VM Single File Restore)  (CNV) | Major | New | 2025-12-05 |  |
-| [OADP-7058](https://redhat.atlassian.net/browse/OADP-7058) | [DOC] VMDR (Virtual Machine Data Protection) / Kopia client on VM (CNV) | Major | New | 2025-12-05 |  |
+| [OADP-7058](https://redhat.atlassian.net/browse/OADP-7058) | [DOC] VMDR (Virtual Machine Data Protection) / Kopia client on VM (CNV) | Major | In Progress | 2025-12-05 |  |
 | [OADP-7690](https://redhat.atlassian.net/browse/OADP-7690) | [DOC] - New BSL default needs DPA restart | Normal | In Progress | 2026-04-07 | Scale&Perf-QE, triaged |
 
-# Shubham Dilip Pampattiwar (5)
-
-## Bugs (3)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-6699](https://redhat.atlassian.net/browse/OADP-6699) | Ignore OVN-K and multus annotations while backing-up/restoring pods | Blocker | Verified | 2025-09-18 | triaged |
-| [OADP-6846](https://redhat.atlassian.net/browse/OADP-6846) | Support for labels/annotations on DataProtectionApplications | Critical | Verified | 2025-10-13 | triaged |
-| [OADP-5171](https://redhat.atlassian.net/browse/OADP-5171) | BSL status.message field shouldn't have the http response as output when bucket doesn't exist | Minor | Verified | 2024-11-04 | oadp_bsl, oadp_upstream_bug_fix, triaged |
+# Shubham Dilip Pampattiwar (2)
 
 ## Epics (2)
 
@@ -162,14 +138,6 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5159](https://redhat.atlassian.net/browse/OADP-5159) | (QE) OADP-OADP 1.6.0 release activities | Undefined | In Progress | 2024-10-31 |  |
 
-# Tiger Kaovilai (1)
-
-## Bugs (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-5829](https://redhat.atlassian.net/browse/OADP-5829) | wrong S3 identifier (resticIdentifier) while using a kopia BackupRepository  | Undefined | Verified | 2025-03-20 | oadp_upstream_bug_fix, triaged |
-
 # Valentina Ashirova (3)
 
 ## Tasks (2)
@@ -185,13 +153,7 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6995](https://redhat.atlassian.net/browse/OADP-6995) | [DOC] kubectl-oadp CLI Plugin Implementation | Major | New | 2025-11-10 |  |
 
-# Wesley Hayutin (2)
-
-## Bugs (1)
-
-| Key | Summary | Priority | Status | Created | Labels |
-|-----|---------|----------|--------|---------|--------|
-| [OADP-6911](https://redhat.atlassian.net/browse/OADP-6911) | [Upstream] Restore CR Completed while PodVolumeRestore CR is InProgress | Major | Verified | 2025-10-27 | oadp_upstream_bug_fix, triaged, upstream |
+# Wesley Hayutin (1)
 
 ## Epics (1)
 
