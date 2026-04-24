@@ -95,6 +95,47 @@ def jira_search(jql, auth_header, extra_fields=None):
     return issues, len(issues)
 
 
+def fetch_child_issues(parent_keys, auth_header):
+    """Fetch subtasks/child issues for a list of parent issue keys.
+
+    Returns a dict mapping parent key -> list of child issue dicts.
+    """
+    if not parent_keys:
+        return {}
+    keys_str = ", ".join(parent_keys)
+    jql = f"parent in ({keys_str}) ORDER BY created ASC"
+    issues = []
+    fields = "summary,status,assignee,issuetype,parent"
+    next_token = None
+    while True:
+        params = {"jql": jql, "maxResults": PAGE_SIZE, "fields": fields}
+        if next_token:
+            params["nextPageToken"] = next_token
+        qs = urllib.parse.urlencode(params)
+        req = urllib.request.Request(
+            f"{API_BASE}/search/jql?{qs}",
+            headers={
+                "Authorization": auth_header,
+                "Accept": "application/json",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read())
+        issues.extend(data["issues"])
+        if data.get("isLast", True):
+            break
+        next_token = data.get("nextPageToken")
+        if not next_token:
+            break
+
+    by_parent = defaultdict(list)
+    for issue in issues:
+        parent_key = (issue["fields"].get("parent") or {}).get("key")
+        if parent_key:
+            by_parent[parent_key].append(issue)
+    return dict(by_parent)
+
+
 ISSUE_TYPES = ("Bug", "Task", "Epic", "Story")
 STORY_STATUSES = ("New", "To Do", "In Progress")
 ISSUE_TYPE_ORDER = {t: i for i, t in enumerate(ISSUE_TYPES)}
@@ -156,7 +197,7 @@ def get_contact_name(issue, group_by="assignee"):
     return assignee["displayName"] if assignee else "Unassigned"
 
 
-def generate_markdown(version, issues, total, qe_mode=False):
+def generate_markdown(version, issues, total, qe_mode=False, subtasks_by_parent=None):
     group_by = "qa_contact" if qe_mode else "assignee"
     group_label = "QA Contact" if qe_mode else "Assignee"
 
@@ -229,6 +270,8 @@ def generate_markdown(version, issues, total, qe_mode=False):
     lines.append("")
     lines.append("---")
 
+    subtasks_by_parent = subtasks_by_parent or {}
+
     for name in all_names:
         person_total = sum(len(v) for v in by_person[name].values())
         lines.append("")
@@ -244,11 +287,43 @@ def generate_markdown(version, issues, total, qe_mode=False):
             ))
             lines.append("")
             lines.append(f"## {itype}s ({len(type_issues)})")
-            lines.append("")
-            lines.append("| Key | Summary | Priority | Status | Created | Labels |")
-            lines.append("|-----|---------|----------|--------|---------|--------|")
-            for issue in type_issues:
-                lines.append(format_issue_row(issue))
+
+            if qe_mode:
+                for issue in type_issues:
+                    f = issue["fields"]
+                    key = issue["key"]
+                    summary = f["summary"]
+                    priority = f.get("priority", {}).get("name", "Undefined")
+                    status = f.get("status", {}).get("name", "")
+                    link = f"https://{JIRA_SITE}/browse/{key}"
+                    lines.append("")
+                    lines.append(f"### [{key}]({link}) — {summary}")
+                    lines.append(f"**Priority:** {priority} | **Status:** {status}")
+
+                    children = subtasks_by_parent.get(key, [])
+                    if children:
+                        lines.append("")
+                        lines.append("**Platform Validation Tasks:**")
+                        lines.append("")
+                        lines.append("| Task | Summary | Assignee | Status |")
+                        lines.append("|------|---------|----------|--------|")
+                        for child in children:
+                            cf = child["fields"]
+                            ckey = child["key"]
+                            clink = f"https://{JIRA_SITE}/browse/{ckey}"
+                            csummary = cf.get("summary", "")
+                            cassignee = (cf.get("assignee") or {}).get("displayName", "Unassigned")
+                            cstatus = (cf.get("status") or {}).get("name", "")
+                            lines.append(f"| [{ckey}]({clink}) | {csummary} | {cassignee} | {cstatus} |")
+                    else:
+                        lines.append("")
+                        lines.append("_No subtasks found._")
+            else:
+                lines.append("")
+                lines.append("| Key | Summary | Priority | Status | Created | Labels |")
+                lines.append("|-----|---------|----------|--------|---------|--------|")
+                for issue in type_issues:
+                    lines.append(format_issue_row(issue))
 
     return "\n".join(lines) + "\n"
 
@@ -280,7 +355,16 @@ def main():
     issues, total = jira_search(jql, auth, extra_fields=extra_fields)
     print(f"Found {total} issues", file=sys.stderr)
 
-    md = generate_markdown(args.version, issues, total, qe_mode=args.qe)
+    subtasks_by_parent = {}
+    if args.qe and issues:
+        parent_keys = [i["key"] for i in issues]
+        print(f"Fetching subtasks for {len(parent_keys)} issues...", file=sys.stderr)
+        subtasks_by_parent = fetch_child_issues(parent_keys, auth)
+        child_count = sum(len(v) for v in subtasks_by_parent.values())
+        print(f"Found {child_count} subtasks across {len(subtasks_by_parent)} parents", file=sys.stderr)
+
+    md = generate_markdown(args.version, issues, total, qe_mode=args.qe,
+                           subtasks_by_parent=subtasks_by_parent)
 
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
     with open(args.output, "w") as f:
