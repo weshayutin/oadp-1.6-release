@@ -2,24 +2,24 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 18  
+**Total issues:** 15  
 **QA Contacts:** 7  
-**Generated:** 2026-04-23
+**Generated:** 2026-04-24
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (18) | Total |
+| QA Contact | Bugs (15) | Total |
 |----------|-------|-------|
 | Aziza Karol | [3](#aziza-karol) | **3** |
 | David Vaanunu | [1](#david-vaanunu) | **1** |
-| Md Nadeem | [4](#md-nadeem) | **4** |
+| Md Nadeem | [1](#md-nadeem) | **1** |
 | Prasad Joshi | [3](#prasad-joshi) | **3** |
 | Pratik Mane | [3](#pratik-mane) | **3** |
 | Tareq Alayan | [2](#tareq-alayan) | **2** |
 | Wesley Hayutin | [2](#wesley-hayutin) | **2** |
-| **Total** | **18** | **18** |
+| **Total** | **15** | **15** |
 
 ---
 
@@ -41,15 +41,12 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-4855](https://redhat.atlassian.net/browse/OADP-4855) | Kopia leaving cache on worker node | Blocker | ON_QA | 2024-09-13 | Scale&Perf-QE, oadp_kopia, oadp_upstream_bug_fix, triaged |
 
-# Md Nadeem (4)
+# Md Nadeem (1)
 
-## Bugs (4)
+## Bugs (1)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-4668](https://redhat.atlassian.net/browse/OADP-4668) | Make using Velero CLI via velero deployment with caCert simple. | Critical | ON_QA | 2024-08-07 | oadp_cli, triaged |
-| [OADP-6896](https://redhat.atlassian.net/browse/OADP-6896) | Node agent pod restarts cancel all DataUploads across all nodes, blocking backup queue in OADP 1.5 | Major | ON_QA | 2025-10-23 | oadp_upstream_bug_fix, oadp_upstream_milestone_v1.18, rosa-impact, triaged |
-| [OADP-6879](https://redhat.atlassian.net/browse/OADP-6879) | Volume policy is in low performance when there are lots of pods and PVCs in the cluster | Normal | ON_QA | 2025-10-20 | oadp_upstream_bug_fix, triaged |
 | [OADP-7132](https://redhat.atlassian.net/browse/OADP-7132) | openshift-velero-plugin panics with 'concurrent map writes' | Undefined | ON_QA | 2025-12-16 | customer-bug, customer-case, triaged |
 
 # Prasad Joshi (3)

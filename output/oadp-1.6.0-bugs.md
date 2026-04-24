@@ -2,18 +2,18 @@
 
 **JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete", "Verified")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 43  
+**Total issues:** 44  
 **Assignees:** 9  
-**Generated:** 2026-04-23
+**Generated:** 2026-04-24
 
 ---
 
 ## Summary
 
-| Assignee | Bugs (1) | Tasks (30) | Epics (9) | Storys (3) | Total |
+| Assignee | Bugs (1) | Tasks (30) | Epics (9) | Storys (4) | Total |
 |----------|-------|-------|-------|-------|-------|
 | Andy Arnold | [1](#andy-arnold) | [16](#andy-arnold) | — | [2](#andy-arnold) | **19** |
-| Joseph Antony Vaikath | — | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | — | **2** |
+| Joseph Antony Vaikath | — | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | **3** |
 | Michal Pryc | — | — | [2](#michal-pryc) | — | **2** |
 | Scott Seago | — | [2](#scott-seago) | [2](#scott-seago) | — | **4** |
 | Shruti Deshpande | — | [3](#shruti-deshpande) | — | — | **3** |
@@ -21,7 +21,7 @@
 | Tareq Alayan | — | [6](#tareq-alayan) | [1](#tareq-alayan) | — | **7** |
 | Valentina Ashirova | — | [2](#valentina-ashirova) | — | [1](#valentina-ashirova) | **3** |
 | Wesley Hayutin | — | — | [1](#wesley-hayutin) | — | **1** |
-| **Total** | **1** | **30** | **9** | **3** | **43** |
+| **Total** | **1** | **30** | **9** | **4** | **44** |
 
 ---
 
@@ -61,7 +61,7 @@
 | [OADP-6278](https://redhat.atlassian.net/browse/OADP-6278) | [DOC] In-Guest File-Level Backup for the OpenShift KubeVirt VMs via OADP | Major | New | 2025-06-16 | CNV, triaged |
 | [OADP-6993](https://redhat.atlassian.net/browse/OADP-6993) | [DOC] Wildcard namespace support | Normal | New | 2025-11-10 | oadp_upstream_milestone_v1.18, triaged |
 
-# Joseph Antony Vaikath (2)
+# Joseph Antony Vaikath (3)
 
 ## Tasks (1)
 
@@ -74,6 +74,12 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-6544](https://redhat.atlassian.net/browse/OADP-6544) | kubectl-oadp CLI Plugin Implementation | Blocker | In Progress | 2025-08-15 | need-qe-and-doc, triaged |
+
+## Storys (1)
+
+| Key | Summary | Priority | Status | Created | Labels |
+|-----|---------|----------|--------|---------|--------|
+| [OADP-7872](https://redhat.atlassian.net/browse/OADP-7872) | Update oadp-must-gather for OADP 1.6: add missing crds | Undefined | To Do | 2026-04-24 | must-gather, oadp-1.6 |
 
 # Michal Pryc (2)
 
