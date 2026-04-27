@@ -2,15 +2,15 @@
 
 **JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete", "Verified")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 43  
-**Assignees:** 9  
+**Total issues:** 44  
+**Assignees:** 10  
 **Generated:** 2026-04-27
 
 ---
 
 ## Summary
 
-| Assignee | Bugs (1) | Tasks (29) | Epics (9) | Storys (4) | Total |
+| Assignee | Bugs (1) | Tasks (29) | Epics (9) | Storys (5) | Total |
 |----------|-------|-------|-------|-------|-------|
 | Andy Arnold | [1](#andy-arnold) | [16](#andy-arnold) | — | [2](#andy-arnold) | **19** |
 | Joseph Antony Vaikath | — | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | **3** |
@@ -19,9 +19,10 @@
 | Shruti Deshpande | — | [3](#shruti-deshpande) | — | — | **3** |
 | Shubham Dilip Pampattiwar | — | — | [2](#shubham-dilip-pampattiwar) | — | **2** |
 | Tareq Alayan | — | [6](#tareq-alayan) | [1](#tareq-alayan) | — | **7** |
+| Unassigned | — | — | — | [1](#unassigned) | **1** |
 | Valentina Ashirova | — | [2](#valentina-ashirova) | — | [1](#valentina-ashirova) | **3** |
 | Wesley Hayutin | — | — | [1](#wesley-hayutin) | — | **1** |
-| **Total** | **1** | **29** | **9** | **4** | **43** |
+| **Total** | **1** | **29** | **9** | **5** | **44** |
 
 ---
 
@@ -79,7 +80,7 @@
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
-| [OADP-7872](https://redhat.atlassian.net/browse/OADP-7872) | Update oadp-must-gather for OADP 1.6: add missing crds | Undefined | To Do | 2026-04-24 | must-gather, oadp-1.6 |
+| [OADP-7872](https://redhat.atlassian.net/browse/OADP-7872) | Update oadp-must-gather for OADP 1.6: add missing crds | Undefined | In Progress | 2026-04-24 | must-gather, oadp-1.6 |
 
 # Michal Pryc (2)
 
@@ -143,6 +144,14 @@
 |-----|---------|----------|--------|---------|--------|
 | [OADP-5159](https://redhat.atlassian.net/browse/OADP-5159) | (QE) OADP-OADP 1.6.0 release activities | Undefined | In Progress | 2024-10-31 |  |
 
+# Unassigned (1)
+
+## Storys (1)
+
+| Key | Summary | Priority | Status | Created | Labels |
+|-----|---------|----------|--------|---------|--------|
+| [OADP-7873](https://redhat.atlassian.net/browse/OADP-7873) | (QE) (jira-auto) Automation Failure & skipped Analysis 1.6.0-202604232357 and Update RP | Undefined | New | 2026-04-27 |  |
+
 # Valentina Ashirova (3)
 
 ## Tasks (2)
@@ -150,7 +159,7 @@
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-2425](https://redhat.atlassian.net/browse/OADP-2425) | Document OADP NFS plugin for full NFS support | Major | New | 2023-08-20 |  |
-| [OADP-6673](https://redhat.atlassian.net/browse/OADP-6673) | [DOC] Parallel backups | Major | New | 2025-09-08 |  |
+| [OADP-6673](https://redhat.atlassian.net/browse/OADP-6673) | [DOC] Parallel backups | Major | In Progress | 2025-09-08 |  |
 
 ## Storys (1)
 

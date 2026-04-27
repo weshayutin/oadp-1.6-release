@@ -2,7 +2,7 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA", "Testing") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 79  
+**Total issues:** 52  
 **QA Contacts:** 7  
 **Generated:** 2026-04-27
 
@@ -10,33 +10,22 @@
 
 ## Summary
 
-| QA Contact | Bugs (13) | Tasks (2) | Storys (64) | Total |
+| QA Contact | Bugs (11) | Tasks (2) | Storys (39) | Total |
 |----------|-------|-------|-------|-------|
-| Aziza Karol | [3](#aziza-karol) | — | [4](#aziza-karol) | **7** |
+| Aziza Karol | [2](#aziza-karol) | — | [11](#aziza-karol) | **13** |
 | David Vaanunu | [1](#david-vaanunu) | — | [1](#david-vaanunu) | **2** |
-| No QA Contact | — | [1](#no-qa-contact) | [59](#no-qa-contact) | **60** |
+| No QA Contact | — | [1](#no-qa-contact) | [27](#no-qa-contact) | **28** |
 | Prasad Joshi | [3](#prasad-joshi) | [1](#prasad-joshi) | — | **4** |
 | Pratik Mane | [3](#pratik-mane) | — | — | **3** |
 | Tareq Alayan | [1](#tareq-alayan) | — | — | **1** |
-| Wesley Hayutin | [2](#wesley-hayutin) | — | — | **2** |
-| **Total** | **13** | **2** | **64** | **79** |
+| Wesley Hayutin | [1](#wesley-hayutin) | — | — | **1** |
+| **Total** | **11** | **2** | **39** | **52** |
 
 ---
 
-# Aziza Karol (7)
+# Aziza Karol (13)
 
-## Bugs (3)
-
-### [OADP-6955](https://redhat.atlassian.net/browse/OADP-6955) — Fix the Job build error when BackupRepository name longer than 63
-**Priority:** Critical | **Status:** ON_QA
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7799](https://redhat.atlassian.net/browse/OADP-7799) | [RedHat QE] Verify Bug  OADP-6955 - Fix the Job build error when BackupRepository name longer than 63 | Aziza Karol | Closed |
-| [OADP-7800](https://redhat.atlassian.net/browse/OADP-7800) | [IBM QE-P] Verify Bug OADP-6955 - Fix the Job build error when BackupRepository name longer than 63 | Sonia Garudi | Closed |
-| [OADP-7801](https://redhat.atlassian.net/browse/OADP-7801) | [IBM QE-Z] Verify Bug OADP-6955 - Fix the Job build error when BackupRepository name longer than 63 | Ukthi Prasad | New |
+## Bugs (2)
 
 ### [OADP-7382](https://redhat.atlassian.net/browse/OADP-7382) — NonAdminController reports reconciler error due to new backup phases 
 **Priority:** Major | **Status:** ON_QA
@@ -60,15 +49,40 @@
 | [OADP-7813](https://redhat.atlassian.net/browse/OADP-7813) | [IBM QE-P] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Sonia Garudi | New |
 | [OADP-7814](https://redhat.atlassian.net/browse/OADP-7814) | [IBM QE-Z] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Ukthi Prasad | New |
 
-## Storys (4)
+## Storys (11)
 
 ### [OADP-3971](https://redhat.atlassian.net/browse/OADP-3971) — Additional secrets cannot be added to velero pod without restart
 **Priority:** Critical | **Status:** Testing
 
 _No subtasks found._
 
+### [OADP-7513](https://redhat.atlassian.net/browse/OADP-7513) — Backup and Restore Custom SCC Associated with ClusterRole/ClusterRoleBinding
+**Priority:** Critical | **Status:** Testing
+
+_No subtasks found._
+
 ### [OADP-2785](https://redhat.atlassian.net/browse/OADP-2785) — Add possibility to configure "priorityClassName" for node-agent daemonset through DPA
 **Priority:** Major | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6688](https://redhat.atlassian.net/browse/OADP-6688) — Velero scheduled backups accumulate in New state queue during extended blocking scenarios
+**Priority:** Major | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6694](https://redhat.atlassian.net/browse/OADP-6694) — Repository maintenance jobs do not inherit tolerations from Velero deployment
+**Priority:** Major | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6176](https://redhat.atlassian.net/browse/OADP-6176) — Support wildcards for namespace backup
+**Priority:** Normal | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6578](https://redhat.atlassian.net/browse/OADP-6578) — CLI internationalization and localization support
+**Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
 
@@ -84,6 +98,16 @@ _No subtasks found._
 | [OADP-6715](https://redhat.atlassian.net/browse/OADP-6715) | (QE)[Complete automation for]  VolumeGroupSnapshot Support Implementation | Prasad Joshi | In Progress |
 | [OADP-6716](https://redhat.atlassian.net/browse/OADP-6716) | (QE)[Test plan internal review for]  VolumeGroupSnapshot Support Implementation | Aziza Karol | New |
 | [OADP-6718](https://redhat.atlassian.net/browse/OADP-6718) | [Test plan review for]  VolumeGroupSnapshot Support Implementation | Wesley Hayutin | New |
+
+### [OADP-6724](https://redhat.atlassian.net/browse/OADP-6724) — Repo cache volume -- DU deliver snapshot size to DD
+**Priority:** Undefined | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6726](https://redhat.atlassian.net/browse/OADP-6726) — Check whether it's possible to remove VolumeSnapshotClass from the CSI B/R
+**Priority:** Undefined | **Status:** Testing
+
+_No subtasks found._
 
 ### [OADP-6739](https://redhat.atlassian.net/browse/OADP-6739) — VolumePolicy support for Phase condition of PVC to allow skipping Pending PVCs
 **Priority:** Undefined | **Status:** Testing
@@ -106,7 +130,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-# No QA Contact (60)
+# No QA Contact (28)
 
 ## Tasks (1)
 
@@ -115,50 +139,10 @@ _No subtasks found._
 
 _No subtasks found._
 
-## Storys (59)
-
-### [OADP-7513](https://redhat.atlassian.net/browse/OADP-7513) — Backup and Restore Custom SCC Associated with ClusterRole/ClusterRoleBinding
-**Priority:** Critical | **Status:** Testing
-
-_No subtasks found._
+## Storys (27)
 
 ### [OADP-6360](https://redhat.atlassian.net/browse/OADP-6360) — Add support for adding annotations to PodConfig
 **Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6688](https://redhat.atlassian.net/browse/OADP-6688) — Velero scheduled backups accumulate in New state queue during extended blocking scenarios
-**Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6694](https://redhat.atlassian.net/browse/OADP-6694) — Repository maintenance jobs do not inherit tolerations from Velero deployment
-**Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6176](https://redhat.atlassian.net/browse/OADP-6176) — Support wildcards for namespace backup
-**Priority:** Normal | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6809](https://redhat.atlassian.net/browse/OADP-6809) — Add VMFR PVC RestoreItemAction plugin for multi-backup collision prevention
-**Priority:** Normal | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6525](https://redhat.atlassian.net/browse/OADP-6525) — Dramatic performance dropoff over time - Velero backup performance degradation
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6545](https://redhat.atlassian.net/browse/OADP-6545) — Support for setting namespace with -n flag when running velero commands
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6546](https://redhat.atlassian.net/browse/OADP-6546) — oadp xyz help may give an example
-**Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
 
@@ -167,77 +151,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-### [OADP-6549](https://redhat.atlassian.net/browse/OADP-6549) — Do we need to use na? if it's not namespace where velero is running it should be by default non admin object
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6550](https://redhat.atlassian.net/browse/OADP-6550) — Rename version --client-only to version --client
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6551](https://redhat.atlassian.net/browse/OADP-6551) — --all flag for nonadmin commands (delete)
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6552](https://redhat.atlassian.net/browse/OADP-6552) — Help text on nabsl creation has wrong command info
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6553](https://redhat.atlassian.net/browse/OADP-6553) — Implications of client - server version mismatch
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6554](https://redhat.atlassian.net/browse/OADP-6554) — Add the plugin to oadp-operator operator hub page
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6555](https://redhat.atlassian.net/browse/OADP-6555) — oc oadp is defaulting to openshift-oadp namespace
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6556](https://redhat.atlassian.net/browse/OADP-6556) — Review CACert config and testing
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6557](https://redhat.atlassian.net/browse/OADP-6557) — NAR crud Support
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6558](https://redhat.atlassian.net/browse/OADP-6558) — OADP CLI plugin installation and setup documentation
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6559](https://redhat.atlassian.net/browse/OADP-6559) — OADP CLI error handling improvements
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6560](https://redhat.atlassian.net/browse/OADP-6560) — Support for custom backup locations in CLI
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6561](https://redhat.atlassian.net/browse/OADP-6561) — CLI command validation and input sanitization
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6562](https://redhat.atlassian.net/browse/OADP-6562) — Add support for backup scheduling through CLI
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6563](https://redhat.atlassian.net/browse/OADP-6563) — Backup status monitoring and progress tracking
 **Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
@@ -262,16 +176,6 @@ _No subtasks found._
 
 _No subtasks found._
 
-### [OADP-6568](https://redhat.atlassian.net/browse/OADP-6568) — Volume snapshot management through CLI
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6569](https://redhat.atlassian.net/browse/OADP-6569) — Backup retention policy configuration
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6570](https://redhat.atlassian.net/browse/OADP-6570) — Cross-cluster backup and restore operations
 **Priority:** Undefined | **Status:** Testing
 
@@ -282,37 +186,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-### [OADP-6572](https://redhat.atlassian.net/browse/OADP-6572) — Resource filtering and selective backup
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6573](https://redhat.atlassian.net/browse/OADP-6573) — Integration with external monitoring systems
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6574](https://redhat.atlassian.net/browse/OADP-6574) — CLI performance optimization and caching
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6575](https://redhat.atlassian.net/browse/OADP-6575) — Backup encryption configuration through CLI
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6576](https://redhat.atlassian.net/browse/OADP-6576) — CLI logging and audit trail functionality
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6577](https://redhat.atlassian.net/browse/OADP-6577) — Backup metadata management and search
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6578](https://redhat.atlassian.net/browse/OADP-6578) — CLI internationalization and localization support
 **Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
@@ -338,16 +212,6 @@ _No subtasks found._
 _No subtasks found._
 
 ### [OADP-6723](https://redhat.atlassian.net/browse/OADP-6723) — Repo cache volume -- PVB deliver snapshot size to PVR
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6724](https://redhat.atlassian.net/browse/OADP-6724) — Repo cache volume -- DU deliver snapshot size to DD
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6726](https://redhat.atlassian.net/browse/OADP-6726) — Check whether it's possible to remove VolumeSnapshotClass from the CSI B/R
 **Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
@@ -539,14 +403,9 @@ _No subtasks found._
 | [OADP-7826](https://redhat.atlassian.net/browse/OADP-7826) | [IBM QE-P] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Sonia Garudi | New |
 | [OADP-7827](https://redhat.atlassian.net/browse/OADP-7827) | [IBM QE-Z] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Ukthi Prasad | New |
 
-# Wesley Hayutin (2)
+# Wesley Hayutin (1)
 
-## Bugs (2)
-
-### [OADP-6880](https://redhat.atlassian.net/browse/OADP-6880) — VolumeGroupSnapshots doesn't respect volumePolicies
-**Priority:** Major | **Status:** ON_QA
-
-_No subtasks found._
+## Bugs (1)
 
 ### [OADP-3692](https://redhat.atlassian.net/browse/OADP-3692) — Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec
 **Priority:** Minor | **Status:** ON_QA
@@ -555,6 +414,6 @@ _No subtasks found._
 
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
-| [OADP-7818](https://redhat.atlassian.net/browse/OADP-7818) | [RedHat QE] Verify Bug  OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Prasad Joshi | New |
+| [OADP-7818](https://redhat.atlassian.net/browse/OADP-7818) | [RedHat QE] Verify Bug  OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Wesley Hayutin | Release Pending |
 | [OADP-7819](https://redhat.atlassian.net/browse/OADP-7819) | [IBM QE-P] Verify Bug OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Sonia Garudi | Closed |
 | [OADP-7820](https://redhat.atlassian.net/browse/OADP-7820) | [IBM QE-Z] Verify Bug OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Ukthi Prasad | New |
