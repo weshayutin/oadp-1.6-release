@@ -2,24 +2,24 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 15  
+**Total issues:** 14  
 **QA Contacts:** 7  
-**Generated:** 2026-04-24
+**Generated:** 2026-04-27
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (15) | Total |
+| QA Contact | Bugs (14) | Total |
 |----------|-------|-------|
 | Aziza Karol | [3](#aziza-karol) | **3** |
 | David Vaanunu | [1](#david-vaanunu) | **1** |
 | Md Nadeem | [1](#md-nadeem) | **1** |
 | Prasad Joshi | [3](#prasad-joshi) | **3** |
 | Pratik Mane | [3](#pratik-mane) | **3** |
-| Tareq Alayan | [2](#tareq-alayan) | **2** |
+| Tareq Alayan | [1](#tareq-alayan) | **1** |
 | Wesley Hayutin | [2](#wesley-hayutin) | **2** |
-| **Total** | **15** | **15** |
+| **Total** | **14** | **14** |
 
 ---
 
@@ -46,7 +46,7 @@
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
 | [OADP-7854](https://redhat.atlassian.net/browse/OADP-7854) | [RedHat QE] Verify Bug  OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Aziza Karol | Closed |
-| [OADP-7856](https://redhat.atlassian.net/browse/OADP-7856) | [IBM QE-P] Verify Bug OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Sonia Garudi | Testing |
+| [OADP-7856](https://redhat.atlassian.net/browse/OADP-7856) | [IBM QE-P] Verify Bug OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Sonia Garudi | Closed |
 | [OADP-7864](https://redhat.atlassian.net/browse/OADP-7864) | [IBM QE-Z] Verify Bug OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Ukthi Prasad | Testing |
 
 ### [OADP-3378](https://redhat.atlassian.net/browse/OADP-3378) — Wrong/ misleading certificate error log for backup when certificate check is disabled
@@ -90,7 +90,7 @@ _No subtasks found._
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
 | [OADP-7796](https://redhat.atlassian.net/browse/OADP-7796) | [RedHat QE] Verify Bug  OADP-4743 - DataMover restore partially fails when node selector spec is used | Prasad Joshi | Closed |
-| [OADP-7797](https://redhat.atlassian.net/browse/OADP-7797) | [IBM QE-P] Verify Bug OADP-4743 - DataMover restore partially fails when node selector spec is used | Sonia Garudi | New |
+| [OADP-7797](https://redhat.atlassian.net/browse/OADP-7797) | [IBM QE-P] Verify Bug OADP-4743 - DataMover restore partially fails when node selector spec is used | Sonia Garudi | Closed |
 | [OADP-7798](https://redhat.atlassian.net/browse/OADP-7798) | [IBM QE-Z] Verify Bug OADP-4743 - DataMover restore partially fails when node selector spec is used | Ukthi Prasad | New |
 
 ### [OADP-6764](https://redhat.atlassian.net/browse/OADP-6764) — Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path
@@ -146,20 +146,9 @@ _No subtasks found._
 | [OADP-7822](https://redhat.atlassian.net/browse/OADP-7822) | [IBM QE-P] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Sonia Garudi | New |
 | [OADP-7823](https://redhat.atlassian.net/browse/OADP-7823) | [IBM QE-Z] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Ukthi Prasad | New |
 
-# Tareq Alayan (2)
+# Tareq Alayan (1)
 
-## Bugs (2)
-
-### [OADP-5114](https://redhat.atlassian.net/browse/OADP-5114) — Incompatibility of OADP with data mover restore
-**Priority:** Normal | **Status:** ON_QA
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7806](https://redhat.atlassian.net/browse/OADP-7806) | [RedHat QE] Verify Bug  OADP-5114 - Incompatibility of OADP with data mover restore | Prasad Joshi | In Progress |
-| [OADP-7807](https://redhat.atlassian.net/browse/OADP-7807) | [IBM QE-P] Verify Bug OADP-5114 - Incompatibility of OADP with data mover restore | Sonia Garudi | New |
-| [OADP-7808](https://redhat.atlassian.net/browse/OADP-7808) | [IBM QE-Z] Verify Bug OADP-5114 - Incompatibility of OADP with data mover restore | Ukthi Prasad | New |
+## Bugs (1)
 
 ### [OADP-5777](https://redhat.atlassian.net/browse/OADP-5777) — Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec.
 **Priority:** Undefined | **Status:** ON_QA

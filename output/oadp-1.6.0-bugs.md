@@ -2,26 +2,26 @@
 
 **JQL:** `(project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic) AND status not in ("MODIFIED", "Closed", "ON_QA", "Dev Complete", "Verified")) OR (project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype = Story AND status in ("New", "To Do", "In Progress")) ORDER BY priority DESC, created DESC`
 
-**Total issues:** 44  
+**Total issues:** 43  
 **Assignees:** 9  
-**Generated:** 2026-04-24
+**Generated:** 2026-04-27
 
 ---
 
 ## Summary
 
-| Assignee | Bugs (1) | Tasks (30) | Epics (9) | Storys (4) | Total |
+| Assignee | Bugs (1) | Tasks (29) | Epics (9) | Storys (4) | Total |
 |----------|-------|-------|-------|-------|-------|
 | Andy Arnold | [1](#andy-arnold) | [16](#andy-arnold) | — | [2](#andy-arnold) | **19** |
 | Joseph Antony Vaikath | — | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | [1](#joseph-antony-vaikath) | **3** |
 | Michal Pryc | — | — | [2](#michal-pryc) | — | **2** |
-| Scott Seago | — | [2](#scott-seago) | [2](#scott-seago) | — | **4** |
+| Scott Seago | — | [1](#scott-seago) | [2](#scott-seago) | — | **3** |
 | Shruti Deshpande | — | [3](#shruti-deshpande) | — | — | **3** |
 | Shubham Dilip Pampattiwar | — | — | [2](#shubham-dilip-pampattiwar) | — | **2** |
 | Tareq Alayan | — | [6](#tareq-alayan) | [1](#tareq-alayan) | — | **7** |
 | Valentina Ashirova | — | [2](#valentina-ashirova) | — | [1](#valentina-ashirova) | **3** |
 | Wesley Hayutin | — | — | [1](#wesley-hayutin) | — | **1** |
-| **Total** | **1** | **30** | **9** | **4** | **44** |
+| **Total** | **1** | **29** | **9** | **4** | **43** |
 
 ---
 
@@ -90,14 +90,13 @@
 | [OADP-6864](https://redhat.atlassian.net/browse/OADP-6864) | Virtual Machine File Restore - Kubernetes-native solution for recovering individual files from KubeVirt VM backups | Blocker | In Progress | 2025-10-15 | need-qe-and-doc, triaged |
 | [OADP-6583](https://redhat.atlassian.net/browse/OADP-6583) | OADP Virtual Machine Data Protection (VMDP) Implementation | Undefined | In Progress | 2025-08-15 | need-qe-and-doc, oadp_cnv, triaged |
 
-# Scott Seago (4)
+# Scott Seago (3)
 
-## Tasks (2)
+## Tasks (1)
 
 | Key | Summary | Priority | Status | Created | Labels |
 |-----|---------|----------|--------|---------|--------|
 | [OADP-4589](https://redhat.atlassian.net/browse/OADP-4589) | Dataupload object reporting improvements | Major | Testing | 2024-07-25 | triaged |
-| [OADP-6478](https://redhat.atlassian.net/browse/OADP-6478) | Revert selective PVC restore by label PR before rebase after upstream velero  | Undefined | Testing | 2025-07-30 | oadp_rebase, traiged, triaged |
 
 ## Epics (2)
 
