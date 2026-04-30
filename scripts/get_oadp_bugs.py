@@ -158,7 +158,7 @@ def build_jql(version, excluded_statuses, issue_types=ISSUE_TYPES):
             f"AND issuetype = Story "
             f"AND status in ({story_statuses}))"
         )
-    return " OR ".join(parts) + " ORDER BY priority DESC, created DESC"
+    return "(" + " OR ".join(parts) + ') AND component != "Documentation" ORDER BY priority DESC, created DESC'
 
 
 def build_qe_jql(version, statuses=QE_STATUSES, issue_types=ISSUE_TYPES):
@@ -167,6 +167,7 @@ def build_qe_jql(version, statuses=QE_STATUSES, issue_types=ISSUE_TYPES):
     return (
         f'project = OADP AND fixVersion = "{version}" AND issuetype in ({types}) '
         f"AND status in ({status_list}) "
+        f'AND component != "Documentation" '
         f"ORDER BY priority DESC, created DESC"
     )
 

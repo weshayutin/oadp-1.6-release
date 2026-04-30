@@ -1,42 +1,30 @@
 # OADP 1.6.0 QE Report (ON_QA, Testing)
 
-**JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA", "Testing") ORDER BY priority DESC, created DESC`
+**JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA", "Testing") AND component != "Documentation" ORDER BY priority DESC, created DESC`
 
-**Total issues:** 44  
-**QA Contacts:** 7  
+**Total issues:** 17  
+**QA Contacts:** 6  
 **Generated:** 2026-04-30
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (8) | Tasks (2) | Storys (34) | Total |
+| QA Contact | Bugs (7) | Tasks (1) | Storys (9) | Total |
 |----------|-------|-------|-------|-------|
-| Aziza Karol | [2](#aziza-karol) | — | [10](#aziza-karol) | **12** |
+| Aziza Karol | [1](#aziza-karol) | — | [4](#aziza-karol) | **5** |
 | David Vaanunu | — | — | [1](#david-vaanunu) | **1** |
-| Md Nadeem | — | — | [1](#md-nadeem) | **1** |
-| No QA Contact | — | [1](#no-qa-contact) | [19](#no-qa-contact) | **20** |
-| Prasad Joshi | [2](#prasad-joshi) | [1](#prasad-joshi) | [2](#prasad-joshi) | **5** |
-| Pratik Mane | [3](#pratik-mane) | — | [1](#pratik-mane) | **4** |
+| No QA Contact | — | — | [4](#no-qa-contact) | **4** |
+| Prasad Joshi | [2](#prasad-joshi) | [1](#prasad-joshi) | — | **3** |
+| Pratik Mane | [3](#pratik-mane) | — | — | **3** |
 | Wesley Hayutin | [1](#wesley-hayutin) | — | — | **1** |
-| **Total** | **8** | **2** | **34** | **44** |
+| **Total** | **7** | **1** | **9** | **17** |
 
 ---
 
-# Aziza Karol (12)
+# Aziza Karol (5)
 
-## Bugs (2)
-
-### [OADP-7382](https://redhat.atlassian.net/browse/OADP-7382) — NonAdminController reports reconciler error due to new backup phases 
-**Priority:** Major | **Status:** ON_QA
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7854](https://redhat.atlassian.net/browse/OADP-7854) | [RedHat QE] Verify Bug  OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Aziza Karol | Closed |
-| [OADP-7856](https://redhat.atlassian.net/browse/OADP-7856) | [IBM QE-P] Verify Bug OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Sonia Garudi | Closed |
-| [OADP-7864](https://redhat.atlassian.net/browse/OADP-7864) | [IBM QE-Z] Verify Bug OADP-7382 - NonAdminController reports reconciler error due to new backup phases  | Ukthi Prasad | Testing |
+## Bugs (1)
 
 ### [OADP-3378](https://redhat.atlassian.net/browse/OADP-3378) — Wrong/ misleading certificate error log for backup when certificate check is disabled
 **Priority:** Normal | **Status:** ON_QA
@@ -49,7 +37,7 @@
 | [OADP-7813](https://redhat.atlassian.net/browse/OADP-7813) | [IBM QE-P] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Sonia Garudi | New |
 | [OADP-7814](https://redhat.atlassian.net/browse/OADP-7814) | [IBM QE-Z] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Ukthi Prasad | New |
 
-## Storys (10)
+## Storys (4)
 
 ### [OADP-3971](https://redhat.atlassian.net/browse/OADP-3971) — Additional secrets cannot be added to velero pod without restart
 **Priority:** Critical | **Status:** Testing
@@ -66,26 +54,6 @@ _No subtasks found._
 
 _No subtasks found._
 
-### [OADP-6688](https://redhat.atlassian.net/browse/OADP-6688) — Velero scheduled backups accumulate in New state queue during extended blocking scenarios
-**Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6694](https://redhat.atlassian.net/browse/OADP-6694) — Repository maintenance jobs do not inherit tolerations from Velero deployment
-**Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6176](https://redhat.atlassian.net/browse/OADP-6176) — Support wildcards for namespace backup
-**Priority:** Normal | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6578](https://redhat.atlassian.net/browse/OADP-6578) — CLI internationalization and localization support
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6712](https://redhat.atlassian.net/browse/OADP-6712) — (Dev) ( VolumeGroupSnapshot Support Implementation ) implementation
 **Priority:** Undefined | **Status:** Testing
 
@@ -99,16 +67,6 @@ _No subtasks found._
 | [OADP-6716](https://redhat.atlassian.net/browse/OADP-6716) | (QE)[Test plan internal review for]  VolumeGroupSnapshot Support Implementation | Aziza Karol | New |
 | [OADP-6718](https://redhat.atlassian.net/browse/OADP-6718) | [Test plan review for]  VolumeGroupSnapshot Support Implementation | Wesley Hayutin | New |
 
-### [OADP-6726](https://redhat.atlassian.net/browse/OADP-6726) — Check whether it's possible to remove VolumeSnapshotClass from the CSI B/R
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6739](https://redhat.atlassian.net/browse/OADP-6739) — VolumePolicy support for Phase condition of PVC to allow skipping Pending PVCs
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 # David Vaanunu (1)
 
 ## Storys (1)
@@ -118,115 +76,14 @@ _No subtasks found._
 
 _No subtasks found._
 
-# Md Nadeem (1)
+# No QA Contact (4)
 
-## Storys (1)
-
-### [OADP-6547](https://redhat.atlassian.net/browse/OADP-6547) — Include must-gather in the oadp-cli
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-# No QA Contact (20)
-
-## Tasks (1)
-
-### [OADP-7483](https://redhat.atlassian.net/browse/OADP-7483) — [DOC] Issue with OADP docs navigation
-**Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-## Storys (19)
+## Storys (4)
 
 ### [OADP-6360](https://redhat.atlassian.net/browse/OADP-6360) — Add support for adding annotations to PodConfig
 **Priority:** Major | **Status:** Testing
 
 _No subtasks found._
-
-### [OADP-6565](https://redhat.atlassian.net/browse/OADP-6565) — Support for multiple cluster contexts
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6570](https://redhat.atlassian.net/browse/OADP-6570) — Cross-cluster backup and restore operations
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6582](https://redhat.atlassian.net/browse/OADP-6582) — Implement VolumeGroupSnapshot (VGS) support in Velero
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6720](https://redhat.atlassian.net/browse/OADP-6720) — Repo cache volume -- cache volume for pod volume restore
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6721](https://redhat.atlassian.net/browse/OADP-6721) — Repo cache volume -- cache volume for data mover restore
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6722](https://redhat.atlassian.net/browse/OADP-6722) — Repo cache volume -- Unified Repo support cache volume configuration
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6729](https://redhat.atlassian.net/browse/OADP-6729) — Deprecate Changing PVC selected-node feature
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6731](https://redhat.atlassian.net/browse/OADP-6731) — Data mover expose diagnostic -- add events to diagnostic
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6732](https://redhat.atlassian.net/browse/OADP-6732) — configMap validation in CLI should print the error when fails
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6733](https://redhat.atlassian.net/browse/OADP-6733) — Maintenance Metrics
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6734](https://redhat.atlassian.net/browse/OADP-6734) — maintenance jobs labels required for network-policies
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6735](https://redhat.atlassian.net/browse/OADP-6735) — Behavioral change to default datamover behavior in go 1.25
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6736](https://redhat.atlassian.net/browse/OADP-6736) — Backup Repository controller may OOM kill Velero server when checking repo existence
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6737](https://redhat.atlassian.net/browse/OADP-6737) — Concurrent backup processing
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-7455](https://redhat.atlassian.net/browse/OADP-7455) — (QE) Add test Coverage for Velero 1.18 features
-**Priority:** Undefined | **Status:** Testing
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7468](https://redhat.atlassian.net/browse/OADP-7468) | (QE) Repository Cache Volume Feature- Test Coverage | Md Nadeem | New |
-| [OADP-7469](https://redhat.atlassian.net/browse/OADP-7469) | (QE) Wildcard Namespace Support- Test Coverage | Prasad Joshi | In Progress |
-| [OADP-7472](https://redhat.atlassian.net/browse/OADP-7472) | (QE) GenerateName Resource Handling- Test Coverage | Tareq Alayan | New |
-| [OADP-7473](https://redhat.atlassian.net/browse/OADP-7473) | (QE) RBAC Restore Ordering- Test Coverage | Tareq Alayan | New |
-| [OADP-7474](https://redhat.atlassian.net/browse/OADP-7474) |  (QE) Privileged FS Backup Pods- Test Coverage | Aziza Karol | New |
-| [OADP-7475](https://redhat.atlassian.net/browse/OADP-7475) | (QE) VolumePolicy VolumeGroupSnapshot- Test Coverage | Prasad Joshi | In Progress |
-| [OADP-7828](https://redhat.atlassian.net/browse/OADP-7828) | (QE) Incremental size for data movers | Prasad Joshi | In Progress |
 
 ### [OADP-7662](https://redhat.atlassian.net/browse/OADP-7662) — [JIRA-AUTO-TEST] OADP 1.6.0 Test Matrix Run
 **Priority:** Undefined | **Status:** Testing
@@ -270,7 +127,7 @@ _No subtasks found._
 | [OADP-7849](https://redhat.atlassian.net/browse/OADP-7849) | (QE) (jira-auto) AWS_MCG | Prasad Joshi | Closed |
 | [OADP-7850](https://redhat.atlassian.net/browse/OADP-7850) | (QE) (jira-auto) AWS_SNO | Prasad Joshi | Closed |
 
-# Prasad Joshi (5)
+# Prasad Joshi (3)
 
 ## Bugs (2)
 
@@ -291,19 +148,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-## Storys (2)
-
-### [OADP-6723](https://redhat.atlassian.net/browse/OADP-6723) — Repo cache volume -- PVB deliver snapshot size to PVR
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6724](https://redhat.atlassian.net/browse/OADP-6724) — Repo cache volume -- DU deliver snapshot size to DD
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-# Pratik Mane (4)
+# Pratik Mane (3)
 
 ## Bugs (3)
 
@@ -339,13 +184,6 @@ _No subtasks found._
 | [OADP-7821](https://redhat.atlassian.net/browse/OADP-7821) | [RedHat QE] Verify Bug  OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Prasad Joshi | Closed |
 | [OADP-7822](https://redhat.atlassian.net/browse/OADP-7822) | [IBM QE-P] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Sonia Garudi | Closed |
 | [OADP-7823](https://redhat.atlassian.net/browse/OADP-7823) | [IBM QE-Z] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Ukthi Prasad | New |
-
-## Storys (1)
-
-### [OADP-6567](https://redhat.atlassian.net/browse/OADP-6567) — CLI output formatting options (JSON, YAML, table)
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
 
 # Wesley Hayutin (1)
 
