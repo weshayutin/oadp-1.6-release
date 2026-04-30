@@ -1,6 +1,6 @@
 # Golang Builders — RHEL & Konveyor
 
-> Go 1.26 .. 1.24 (latest 3 minor releases) | Generated 2026-04-27 21:14 UTC
+> Go 1.26 .. 1.24 (latest 3 minor releases) | Generated 2026-04-30 12:21 UTC
 >
 > Sources: [RHEL Buildroots Grid](https://dbenoit.pages.redhat.com/grid/buildroots.json) · [Konveyor Builder](https://quay.io/repository/konveyor/builder?tab=tags)
 
@@ -30,13 +30,11 @@ _none_
 
 ## Go 1.25
 
-### RHEL Buildroots (9 targets)
+### RHEL Buildroots (7 targets)
 
 | Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Current | Latest Brew | Status | Latest Tested |
 |------------------------------------------|---------|-------------|--------|---------------|
 | `rhaos-4.19-rhel-10-build` | `golang-1.25.9-3.el10_1` | `golang-1.25.9-3.el10_1` | **Pass** | `golang-1.25.9-3.el10_1` |
-| `rhaos-4.21-rhel-8-build` | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` | **Pass** | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` |
-| `rhaos-4.21-rhel-9-build` | `golang-1.25.9-1.el9_7` | `golang-1.25.9-1.el9_7` | **Pass** | `golang-1.25.9-1.el9_7` |
 | `rhaos-4.22-rhel-10-build` | `golang-1.25.7-1.el10` | `golang-1.25.9-3.el10_1` | **Pass** | `golang-1.25.9-3.el10_1` |
 | `rhaos-4.22-rhel-8-build` | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` | **Pass** | `golang-1.25.9-1.module+el8.10.0+24226+c418b32c` |
 | `rhaos-4.22-rhel-9-build` | `golang-1.25.9-1.el9_7` | `golang-1.25.9-1.el9_7` | **Pass** | `golang-1.25.9-1.el9_7` |
@@ -70,14 +68,16 @@ _none_
 
 ## Go 1.24
 
-### RHEL Buildroots (4 targets)
+### RHEL Buildroots (6 targets)
 
 | Target&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | Current | Latest Brew | Status | Latest Tested |
 |------------------------------------------|---------|-------------|--------|---------------|
 | `rhaos-4.20-rhel-10-build` | `golang-1.24.3-3.el10` | `golang-1.24.13-5.el10_0` | **Pass** | `golang-1.24.13-5.el10_0` |
-| `rhaos-4.20-rhel-8-build` | `golang-1.24.13-4.el8_10` | `golang-1.24.13-4.el8_10` | **Pass** | `golang-1.24.13-4.el8_10` |
-| `rhaos-4.20-rhel-9-build` | `golang-1.24.13-4.el9_6` | `golang-1.24.13-5.el9_6` | In Progress | `golang-1.24.13-4.el9_6` |
+| `rhaos-4.20-rhel-8-build` | `golang-1.24.13-4.el8_10` | `golang-1.24.13-5.el8_10` | **Pass** | `golang-1.24.13-5.el8_10` |
+| `rhaos-4.20-rhel-9-build` | `golang-1.24.13-4.el9_6` | `golang-1.24.13-5.el9_6` | **Pass** | `golang-1.24.13-5.el9_6` |
 | `rhaos-4.21-rhel-10-build` | `golang-1.24.13-1.el10_0` | `golang-1.24.13-5.el10_0` | **Pass** | `golang-1.24.13-5.el10_0` |
+| `rhaos-4.21-rhel-8-build` | `golang-1.24.13-3.el8_10` | `golang-1.24.13-5.el8_10` | **Pass** | `golang-1.24.13-5.el8_10` |
+| `rhaos-4.21-rhel-9-build` | `golang-1.24.13-3.el9_6` | `golang-1.24.13-5.el9_6` | **Pass** | `golang-1.24.13-5.el9_6` |
 
 ### Konveyor Builder — `quay.io/konveyor/builder` (13 tags)
 

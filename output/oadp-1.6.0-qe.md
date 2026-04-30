@@ -2,28 +2,28 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA", "Testing") ORDER BY priority DESC, created DESC`
 
-**Total issues:** 52  
+**Total issues:** 44  
 **QA Contacts:** 7  
-**Generated:** 2026-04-27
+**Generated:** 2026-04-30
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (11) | Tasks (2) | Storys (39) | Total |
+| QA Contact | Bugs (8) | Tasks (2) | Storys (34) | Total |
 |----------|-------|-------|-------|-------|
-| Aziza Karol | [2](#aziza-karol) | — | [11](#aziza-karol) | **13** |
-| David Vaanunu | [1](#david-vaanunu) | — | [1](#david-vaanunu) | **2** |
-| No QA Contact | — | [1](#no-qa-contact) | [27](#no-qa-contact) | **28** |
-| Prasad Joshi | [3](#prasad-joshi) | [1](#prasad-joshi) | — | **4** |
-| Pratik Mane | [3](#pratik-mane) | — | — | **3** |
-| Tareq Alayan | [1](#tareq-alayan) | — | — | **1** |
+| Aziza Karol | [2](#aziza-karol) | — | [10](#aziza-karol) | **12** |
+| David Vaanunu | — | — | [1](#david-vaanunu) | **1** |
+| Md Nadeem | — | — | [1](#md-nadeem) | **1** |
+| No QA Contact | — | [1](#no-qa-contact) | [19](#no-qa-contact) | **20** |
+| Prasad Joshi | [2](#prasad-joshi) | [1](#prasad-joshi) | [2](#prasad-joshi) | **5** |
+| Pratik Mane | [3](#pratik-mane) | — | [1](#pratik-mane) | **4** |
 | Wesley Hayutin | [1](#wesley-hayutin) | — | — | **1** |
-| **Total** | **11** | **2** | **39** | **52** |
+| **Total** | **8** | **2** | **34** | **44** |
 
 ---
 
-# Aziza Karol (13)
+# Aziza Karol (12)
 
 ## Bugs (2)
 
@@ -49,7 +49,7 @@
 | [OADP-7813](https://redhat.atlassian.net/browse/OADP-7813) | [IBM QE-P] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Sonia Garudi | New |
 | [OADP-7814](https://redhat.atlassian.net/browse/OADP-7814) | [IBM QE-Z] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Ukthi Prasad | New |
 
-## Storys (11)
+## Storys (10)
 
 ### [OADP-3971](https://redhat.atlassian.net/browse/OADP-3971) — Additional secrets cannot be added to velero pod without restart
 **Priority:** Critical | **Status:** Testing
@@ -99,11 +99,6 @@ _No subtasks found._
 | [OADP-6716](https://redhat.atlassian.net/browse/OADP-6716) | (QE)[Test plan internal review for]  VolumeGroupSnapshot Support Implementation | Aziza Karol | New |
 | [OADP-6718](https://redhat.atlassian.net/browse/OADP-6718) | [Test plan review for]  VolumeGroupSnapshot Support Implementation | Wesley Hayutin | New |
 
-### [OADP-6724](https://redhat.atlassian.net/browse/OADP-6724) — Repo cache volume -- DU deliver snapshot size to DD
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6726](https://redhat.atlassian.net/browse/OADP-6726) — Check whether it's possible to remove VolumeSnapshotClass from the CSI B/R
 **Priority:** Undefined | **Status:** Testing
 
@@ -114,14 +109,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-# David Vaanunu (2)
-
-## Bugs (1)
-
-### [OADP-4855](https://redhat.atlassian.net/browse/OADP-4855) — Kopia leaving cache on worker node
-**Priority:** Blocker | **Status:** ON_QA
-
-_No subtasks found._
+# David Vaanunu (1)
 
 ## Storys (1)
 
@@ -130,7 +118,16 @@ _No subtasks found._
 
 _No subtasks found._
 
-# No QA Contact (28)
+# Md Nadeem (1)
+
+## Storys (1)
+
+### [OADP-6547](https://redhat.atlassian.net/browse/OADP-6547) — Include must-gather in the oadp-cli
+**Priority:** Undefined | **Status:** Testing
+
+_No subtasks found._
+
+# No QA Contact (20)
 
 ## Tasks (1)
 
@@ -139,25 +136,10 @@ _No subtasks found._
 
 _No subtasks found._
 
-## Storys (27)
+## Storys (19)
 
 ### [OADP-6360](https://redhat.atlassian.net/browse/OADP-6360) — Add support for adding annotations to PodConfig
 **Priority:** Major | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6547](https://redhat.atlassian.net/browse/OADP-6547) — Include must-gather in the oadp-cli
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6555](https://redhat.atlassian.net/browse/OADP-6555) — oc oadp is defaulting to openshift-oadp namespace
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6564](https://redhat.atlassian.net/browse/OADP-6564) — CLI configuration file management
-**Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
 
@@ -166,27 +148,7 @@ _No subtasks found._
 
 _No subtasks found._
 
-### [OADP-6566](https://redhat.atlassian.net/browse/OADP-6566) — Restore operation validation and dry-run
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6567](https://redhat.atlassian.net/browse/OADP-6567) — CLI output formatting options (JSON, YAML, table)
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
 ### [OADP-6570](https://redhat.atlassian.net/browse/OADP-6570) — Cross-cluster backup and restore operations
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6571](https://redhat.atlassian.net/browse/OADP-6571) — CLI plugin auto-update mechanism
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6575](https://redhat.atlassian.net/browse/OADP-6575) — Backup encryption configuration through CLI
 **Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
@@ -207,11 +169,6 @@ _No subtasks found._
 _No subtasks found._
 
 ### [OADP-6722](https://redhat.atlassian.net/browse/OADP-6722) — Repo cache volume -- Unified Repo support cache volume configuration
-**Priority:** Undefined | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-6723](https://redhat.atlassian.net/browse/OADP-6723) — Repo cache volume -- PVB deliver snapshot size to PVR
 **Priority:** Undefined | **Status:** Testing
 
 _No subtasks found._
@@ -313,31 +270,14 @@ _No subtasks found._
 | [OADP-7849](https://redhat.atlassian.net/browse/OADP-7849) | (QE) (jira-auto) AWS_MCG | Prasad Joshi | Closed |
 | [OADP-7850](https://redhat.atlassian.net/browse/OADP-7850) | (QE) (jira-auto) AWS_SNO | Prasad Joshi | Closed |
 
-# Prasad Joshi (4)
+# Prasad Joshi (5)
 
-## Bugs (3)
+## Bugs (2)
 
-### [OADP-4743](https://redhat.atlassian.net/browse/OADP-4743) — DataMover restore partially fails when node selector spec is used
-**Priority:** Critical | **Status:** ON_QA
+### [OADP-4855](https://redhat.atlassian.net/browse/OADP-4855) — Kopia leaving cache on worker node
+**Priority:** Blocker | **Status:** ON_QA
 
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7796](https://redhat.atlassian.net/browse/OADP-7796) | [RedHat QE] Verify Bug  OADP-4743 - DataMover restore partially fails when node selector spec is used | Prasad Joshi | Closed |
-| [OADP-7797](https://redhat.atlassian.net/browse/OADP-7797) | [IBM QE-P] Verify Bug OADP-4743 - DataMover restore partially fails when node selector spec is used | Sonia Garudi | Closed |
-| [OADP-7798](https://redhat.atlassian.net/browse/OADP-7798) | [IBM QE-Z] Verify Bug OADP-4743 - DataMover restore partially fails when node selector spec is used | Ukthi Prasad | New |
-
-### [OADP-6764](https://redhat.atlassian.net/browse/OADP-6764) — Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path
-**Priority:** Critical | **Status:** ON_QA
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7803](https://redhat.atlassian.net/browse/OADP-7803) | [RedHat QE] Verify Bug  OADP-6764 - Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path | Prasad Joshi | Closed |
-| [OADP-7804](https://redhat.atlassian.net/browse/OADP-7804) | [IBM QE-P] Verify Bug OADP-6764 - Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path | Sonia Garudi | New |
-| [OADP-7805](https://redhat.atlassian.net/browse/OADP-7805) | [IBM QE-Z] Verify Bug OADP-6764 - Velero 1.17 filesystem backup is broken for clusters that require Privileged pod security context to access the mount path | Ukthi Prasad | New |
+_No subtasks found._
 
 ### [OADP-7381](https://redhat.atlassian.net/browse/OADP-7381) — [CSI] VGS restore fails when used with Ceph RBD storage class 
 **Priority:** Critical | **Status:** ON_QA
@@ -351,7 +291,19 @@ _No subtasks found._
 
 _No subtasks found._
 
-# Pratik Mane (3)
+## Storys (2)
+
+### [OADP-6723](https://redhat.atlassian.net/browse/OADP-6723) — Repo cache volume -- PVB deliver snapshot size to PVR
+**Priority:** Undefined | **Status:** Testing
+
+_No subtasks found._
+
+### [OADP-6724](https://redhat.atlassian.net/browse/OADP-6724) — Repo cache volume -- DU deliver snapshot size to DD
+**Priority:** Undefined | **Status:** Testing
+
+_No subtasks found._
+
+# Pratik Mane (4)
 
 ## Bugs (3)
 
@@ -363,7 +315,7 @@ _No subtasks found._
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
 | [OADP-7815](https://redhat.atlassian.net/browse/OADP-7815) | [RedHat QE] Verify Bug  OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Prasad Joshi | Closed |
-| [OADP-7816](https://redhat.atlassian.net/browse/OADP-7816) | [IBM QE-P] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Sonia Garudi | New |
+| [OADP-7816](https://redhat.atlassian.net/browse/OADP-7816) | [IBM QE-P] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Sonia Garudi | Closed |
 | [OADP-7817](https://redhat.atlassian.net/browse/OADP-7817) | [IBM QE-Z] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Ukthi Prasad | New |
 
 ### [OADP-3759](https://redhat.atlassian.net/browse/OADP-3759) — Velero shouldn't restore the restore-wait init container
@@ -374,7 +326,7 @@ _No subtasks found._
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
 | [OADP-7809](https://redhat.atlassian.net/browse/OADP-7809) | [RedHat QE] Verify Bug  OADP-3759 - Velero shouldn't restore the restore-wait init container | Prasad Joshi | Closed |
-| [OADP-7810](https://redhat.atlassian.net/browse/OADP-7810) | [IBM QE-P] Verify Bug OADP-3759 - Velero shouldn't restore the restore-wait init container | Sonia Garudi | New |
+| [OADP-7810](https://redhat.atlassian.net/browse/OADP-7810) | [IBM QE-P] Verify Bug OADP-3759 - Velero shouldn't restore the restore-wait init container | Sonia Garudi | Closed |
 | [OADP-7811](https://redhat.atlassian.net/browse/OADP-7811) | [IBM QE-Z] Verify Bug OADP-3759 - Velero shouldn't restore the restore-wait init container | Ukthi Prasad | New |
 
 ### [OADP-3360](https://redhat.atlassian.net/browse/OADP-3360) — PVC has a left out label related to volumeSnapshot after success FileSystem Restore
@@ -385,23 +337,15 @@ _No subtasks found._
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
 | [OADP-7821](https://redhat.atlassian.net/browse/OADP-7821) | [RedHat QE] Verify Bug  OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Prasad Joshi | Closed |
-| [OADP-7822](https://redhat.atlassian.net/browse/OADP-7822) | [IBM QE-P] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Sonia Garudi | New |
+| [OADP-7822](https://redhat.atlassian.net/browse/OADP-7822) | [IBM QE-P] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Sonia Garudi | Closed |
 | [OADP-7823](https://redhat.atlassian.net/browse/OADP-7823) | [IBM QE-Z] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Ukthi Prasad | New |
 
-# Tareq Alayan (1)
+## Storys (1)
 
-## Bugs (1)
+### [OADP-6567](https://redhat.atlassian.net/browse/OADP-6567) — CLI output formatting options (JSON, YAML, table)
+**Priority:** Undefined | **Status:** Testing
 
-### [OADP-5777](https://redhat.atlassian.net/browse/OADP-5777) — Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec.
-**Priority:** Undefined | **Status:** ON_QA
-
-**Platform Validation Tasks:**
-
-| Task | Summary | Assignee | Status |
-|------|---------|----------|--------|
-| [OADP-7825](https://redhat.atlassian.net/browse/OADP-7825) | [RedHat QE] Verify Bug  OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Prasad Joshi | New |
-| [OADP-7826](https://redhat.atlassian.net/browse/OADP-7826) | [IBM QE-P] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Sonia Garudi | New |
-| [OADP-7827](https://redhat.atlassian.net/browse/OADP-7827) | [IBM QE-Z] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Ukthi Prasad | New |
+_No subtasks found._
 
 # Wesley Hayutin (1)
 
@@ -414,6 +358,6 @@ _No subtasks found._
 
 | Task | Summary | Assignee | Status |
 |------|---------|----------|--------|
-| [OADP-7818](https://redhat.atlassian.net/browse/OADP-7818) | [RedHat QE] Verify Bug  OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Wesley Hayutin | Release Pending |
+| [OADP-7818](https://redhat.atlassian.net/browse/OADP-7818) | [RedHat QE] Verify Bug  OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Wesley Hayutin | Closed |
 | [OADP-7819](https://redhat.atlassian.net/browse/OADP-7819) | [IBM QE-P] Verify Bug OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Sonia Garudi | Closed |
 | [OADP-7820](https://redhat.atlassian.net/browse/OADP-7820) | [IBM QE-Z] Verify Bug OADP-3692 - Make dpa.spec.configuration.velero.defaultVolumesToFSBackup flag identical to backup spec | Ukthi Prasad | New |
