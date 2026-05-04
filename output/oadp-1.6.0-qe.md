@@ -2,27 +2,28 @@
 
 **JQL:** `project = OADP AND fixVersion = "OADP 1.6.0" AND issuetype in (Bug, Task, Epic, Story) AND status in ("ON_QA", "Testing") AND component != "Documentation" ORDER BY priority DESC, created DESC`
 
-**Total issues:** 17  
-**QA Contacts:** 6  
-**Generated:** 2026-04-30
+**Total issues:** 18  
+**QA Contacts:** 7  
+**Generated:** 2026-05-04
 
 ---
 
 ## Summary
 
-| QA Contact | Bugs (7) | Tasks (1) | Storys (9) | Total |
+| QA Contact | Bugs (9) | Tasks (1) | Storys (8) | Total |
 |----------|-------|-------|-------|-------|
-| Aziza Karol | [1](#aziza-karol) | — | [4](#aziza-karol) | **5** |
+| Aziza Karol | [1](#aziza-karol) | — | [3](#aziza-karol) | **4** |
 | David Vaanunu | — | — | [1](#david-vaanunu) | **1** |
 | No QA Contact | — | — | [4](#no-qa-contact) | **4** |
 | Prasad Joshi | [2](#prasad-joshi) | [1](#prasad-joshi) | — | **3** |
 | Pratik Mane | [3](#pratik-mane) | — | — | **3** |
+| Tareq Alayan | [2](#tareq-alayan) | — | — | **2** |
 | Wesley Hayutin | [1](#wesley-hayutin) | — | — | **1** |
-| **Total** | **7** | **1** | **9** | **17** |
+| **Total** | **9** | **1** | **8** | **18** |
 
 ---
 
-# Aziza Karol (5)
+# Aziza Karol (4)
 
 ## Bugs (1)
 
@@ -37,14 +38,9 @@
 | [OADP-7813](https://redhat.atlassian.net/browse/OADP-7813) | [IBM QE-P] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Sonia Garudi | New |
 | [OADP-7814](https://redhat.atlassian.net/browse/OADP-7814) | [IBM QE-Z] Verify Bug OADP-3378 - Wrong/ misleading certificate error log for backup when certificate check is disabled | Ukthi Prasad | New |
 
-## Storys (4)
+## Storys (3)
 
 ### [OADP-3971](https://redhat.atlassian.net/browse/OADP-3971) — Additional secrets cannot be added to velero pod without restart
-**Priority:** Critical | **Status:** Testing
-
-_No subtasks found._
-
-### [OADP-7513](https://redhat.atlassian.net/browse/OADP-7513) — Backup and Restore Custom SCC Associated with ClusterRole/ClusterRoleBinding
 **Priority:** Critical | **Status:** Testing
 
 _No subtasks found._
@@ -161,7 +157,7 @@ _No subtasks found._
 |------|---------|----------|--------|
 | [OADP-7815](https://redhat.atlassian.net/browse/OADP-7815) | [RedHat QE] Verify Bug  OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Prasad Joshi | Closed |
 | [OADP-7816](https://redhat.atlassian.net/browse/OADP-7816) | [IBM QE-P] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Sonia Garudi | Closed |
-| [OADP-7817](https://redhat.atlassian.net/browse/OADP-7817) | [IBM QE-Z] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Ukthi Prasad | New |
+| [OADP-7817](https://redhat.atlassian.net/browse/OADP-7817) | [IBM QE-Z] Verify Bug OADP-3039 - PodVolumeBackup/Restore CR status not marked as failed after backup/restore is failed | Ukthi Prasad | Closed |
 
 ### [OADP-3759](https://redhat.atlassian.net/browse/OADP-3759) — Velero shouldn't restore the restore-wait init container
 **Priority:** Normal | **Status:** ON_QA
@@ -183,7 +179,33 @@ _No subtasks found._
 |------|---------|----------|--------|
 | [OADP-7821](https://redhat.atlassian.net/browse/OADP-7821) | [RedHat QE] Verify Bug  OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Prasad Joshi | Closed |
 | [OADP-7822](https://redhat.atlassian.net/browse/OADP-7822) | [IBM QE-P] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Sonia Garudi | Closed |
-| [OADP-7823](https://redhat.atlassian.net/browse/OADP-7823) | [IBM QE-Z] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Ukthi Prasad | New |
+| [OADP-7823](https://redhat.atlassian.net/browse/OADP-7823) | [IBM QE-Z] Verify Bug OADP-3360 - PVC has a left out label related to volumeSnapshot after success FileSystem Restore | Ukthi Prasad | Closed |
+
+# Tareq Alayan (2)
+
+## Bugs (2)
+
+### [OADP-5114](https://redhat.atlassian.net/browse/OADP-5114) — Incompatibility of OADP with data mover restore
+**Priority:** Normal | **Status:** ON_QA
+
+**Platform Validation Tasks:**
+
+| Task | Summary | Assignee | Status |
+|------|---------|----------|--------|
+| [OADP-7806](https://redhat.atlassian.net/browse/OADP-7806) | [RedHat QE] Verify Bug  OADP-5114 - Incompatibility of OADP with data mover restore | Tareq Alayan | Closed |
+| [OADP-7807](https://redhat.atlassian.net/browse/OADP-7807) | [IBM QE-P] Verify Bug OADP-5114 - Incompatibility of OADP with data mover restore | Sonia Garudi | New |
+| [OADP-7808](https://redhat.atlassian.net/browse/OADP-7808) | [IBM QE-Z] Verify Bug OADP-5114 - Incompatibility of OADP with data mover restore | Ukthi Prasad | New |
+
+### [OADP-5777](https://redhat.atlassian.net/browse/OADP-5777) — Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec.
+**Priority:** Undefined | **Status:** ON_QA
+
+**Platform Validation Tasks:**
+
+| Task | Summary | Assignee | Status |
+|------|---------|----------|--------|
+| [OADP-7825](https://redhat.atlassian.net/browse/OADP-7825) | [RedHat QE] Verify Bug  OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Tareq Alayan | In Progress |
+| [OADP-7826](https://redhat.atlassian.net/browse/OADP-7826) | [IBM QE-P] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Sonia Garudi | New |
+| [OADP-7827](https://redhat.atlassian.net/browse/OADP-7827) | [IBM QE-Z] Verify Bug OADP-5777 - Backup Partially Fails with AWS bucket with " region not found ", in absence of VSL spec. | Ukthi Prasad | New |
 
 # Wesley Hayutin (1)
 
